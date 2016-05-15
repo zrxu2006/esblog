@@ -8,5 +8,6 @@ namespace EsbLog
 {
     public class Class1
     {
+
     }
 }
