@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EsbLog
 {
-    public class Class1
+    public interface IEsbLog
     {
           
     }

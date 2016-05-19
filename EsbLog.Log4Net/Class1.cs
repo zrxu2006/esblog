@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EsbLog.Core
+namespace EsbLog.Log4Net
 {
     public class Class1
     {

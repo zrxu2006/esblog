@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EsbLog.WebApi.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,7 @@ namespace EsbLog.WebApi
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            Log4netConfig.Config();
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
