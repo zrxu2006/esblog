@@ -146,6 +146,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EsbLog.Log4Net\EsbLog.Log4Net.csproj">
+      <Project>{0ec1a6f0-5866-4ad1-9d87-742be0db6dff}</Project>
+      <Name>EsbLog.Log4Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EsbLog\EsbLog.csproj">
       <Project>{a010766f-7a3d-40c5-ab70-278bd85fa9f4}</Project>
       <Name>EsbLog</Name>
@@ -155,7 +159,12 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="log4net.config" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\EsbLogWebApiIIS.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

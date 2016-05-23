@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EsbLog.Log4Net
+namespace EsbLog.Tools.HttpRequest
 {
-    public class Class1
+    public enum NetworkState
     {
+        LinkSuccess = 1,
+        Linking = 2,
+        LinkFail = 3,
     }
 }

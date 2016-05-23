@@ -105,6 +105,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EsbLog.Log4Net\EsbLog.Log4Net.csproj">
+      <Project>{0ec1a6f0-5866-4ad1-9d87-742be0db6dff}</Project>
+      <Name>EsbLog.Log4Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Tools\EsbLog.Tools.csproj">
+      <Project>{aaabc9fc-da05-421f-993f-e01bb1739e24}</Project>
+      <Name>EsbLog.Tools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EsbLog.WebApi\EsbLog.WebApi.csproj">
       <Project>{0BC5D12B-7119-4CC7-A2A6-34E15EEBDE0C}</Project>
       <Name>EsbLog.WebApi</Name>

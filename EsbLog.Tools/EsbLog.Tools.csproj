@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,11 +41,36 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="HttpRequest\Common\AsyncCallback.cs" />
+    <Compile Include="HttpRequest\Common\AsyncCallResult.cs" />
+    <Compile Include="HttpRequest\Common\BooleanResultInfo.cs" />
+    <Compile Include="HttpRequest\Common\Constants.cs" />
+    <Compile Include="HttpRequest\Common\ErrorResponse.cs" />
+    <Compile Include="HttpRequest\Common\Geo.cs" />
+    <Compile Include="HttpRequest\Common\GeoPoint.cs" />
+    <Compile Include="HttpRequest\Common\HttpMethod.cs" />
+    <Compile Include="HttpRequest\Common\Hyperlink.cs" />
+    <Compile Include="HttpRequest\Common\IResponseErrorHandler.cs" />
+    <Compile Include="HttpRequest\Common\LocalErrorCode.cs" />
+    <Compile Include="HttpRequest\Common\ParamCollection.cs" />
+    <Compile Include="HttpRequest\Common\ParamPair.cs" />
+    <Compile Include="HttpRequest\Common\ResponseErrorData.cs" />
+    <Compile Include="HttpRequest\Common\ResponseErrorEventArgs.cs" />
+    <Compile Include="HttpRequest\Common\RFC3986Encoder.cs" />
+    <Compile Include="HttpRequest\Common\Source.cs" />
+    <Compile Include="HttpRequest\Common\UnreadInfo.cs" />
+    <Compile Include="HttpRequest\HttpGet.cs" />
+    <Compile Include="HttpRequest\HttpPost.cs" />
+    <Compile Include="HttpRequest\HttpRequest.cs" />
+    <Compile Include="HttpRequest\IHttpRequest.cs" />
+    <Compile Include="HttpRequest\MultiPartField.cs" />
+    <Compile Include="HttpRequest\MultiPartHttpPost.cs" />
+    <Compile Include="HttpRequest\NetworkState.cs" />
+    <Compile Include="HttpRequest\ProxyIP.cs" />
+    <Compile Include="HttpRequest\UploadFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="HttpRequest\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -12,7 +12,9 @@ namespace EsbLog.WebApi.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
+            log4net.LogManager.GetLogger("EsbLog.App.Log").Info("values get");
             return new string[] { "value1", "value2" };
+
         }
 
         //public IEnumerable<string> GetAllValues()

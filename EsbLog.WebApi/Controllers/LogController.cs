@@ -1,4 +1,5 @@
-﻿using EsbLog.WebApi.App_Start;
+﻿using EsbLog.Log4Net;
+using EsbLog.WebApi.App_Start;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,10 @@ namespace EsbLog.WebApi.Controllers
     {
         private static readonly ILog log = LogManager.GetLogger("EsbLog.App.Log");
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post([FromBody]LogRequest value)
         {
-            log.Info(value);
+            var s = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            log.Info(s);
         }
 
         public string Get(string id)

@@ -21,5 +21,10 @@ namespace EsbLog.WebApi
             Log4netConfig.Config();
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_End()
+        {
+            log4net.LogManager.GetLogger("EsbLog.App.Log").Info("APP END");
+        }
     }
 }
