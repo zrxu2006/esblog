@@ -33,13 +33,19 @@ namespace EsbLog.WebApi.Tests.Controllers
         [TestMethod]
         public void PostIIS()
         {
-           
+            var now = DateTime.Now;
+            var ticks = now.Ticks;
+
+            TimeSpan s = new TimeSpan(ticks);
+
+            
+            //TimeSpan s = new TimeSpan()
             //Task.Run(()=>task()).Start();
-            HttpGet reqGet = new HttpGet("http://localhost:8988/api/values");
+            HttpGet reqGet = new HttpGet("http://localhost:8888/api/values");
             var result = reqGet.Request();
 
 
-            //HttpPost req = new HttpPost("http://localhost:8988/api/values");
+            //HttpPost req = new HttpPost("http://localhost:8888/api/values");
             //req.PostData = "va";
             //var strRes = req.Request();
 
@@ -62,7 +68,7 @@ namespace EsbLog.WebApi.Tests.Controllers
             r.AppId = "ttt";
             r.LogLevel = "ddd";
 
-            HttpPost req = new HttpPost("http://localhost:8988/api/log");
+            HttpPost req = new HttpPost("http://localhost:8888/api/log");
             req.PostData = JsonConvert.SerializeObject(r);
             var strRes = req.Request();
             strRes = req.Request();
