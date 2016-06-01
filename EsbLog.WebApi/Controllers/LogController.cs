@@ -1,4 +1,5 @@
-﻿using EsbLog.Log4Net;
+﻿using EsbLog.Esb.Message;
+using EsbLog.Log4Net;
 using EsbLog.WebApi.App_Start;
 using log4net;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace EsbLog.WebApi.Controllers
@@ -17,10 +19,19 @@ namespace EsbLog.WebApi.Controllers
     {
         private static readonly ILog log = LogManager.GetLogger("EsbLog.App.Log");
         // POST api/values
-        public void Post([FromBody]LogRequest value)
+        public async Task Post([FromBody]LogRequest value)
         {
-            var s = Newtonsoft.Json.JsonConvert.SerializeObject(value);
-            log.Info(s);
+            log.Info("Post 开始");
+
+            await WebApiApplication.LogBus.Publish<ILogRequested>(new 
+            {
+                AppId = value.AppId,
+                LogLevel = value.LogLevel,
+                Content= DateTime.Now.ToString(),
+                Ticks = DateTime.Now.Ticks
+            });
+            
+            log.Info("Post 结束");
         }
 
         public string Get(string id)
