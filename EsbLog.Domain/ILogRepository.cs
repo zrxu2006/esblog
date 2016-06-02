@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EsbLog.Esb
+namespace EsbLog.Domain
 {
-    public class Class1
+    public interface ILogRepository
     {
+        int Save(Log entity);
+        Task<int> SaveAsync(Log entity);
     }
 }
