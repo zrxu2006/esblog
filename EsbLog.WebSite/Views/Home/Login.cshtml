@@ -1,0 +1,254 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>登录</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="~/Content/easyui/jquery.easyui.min.js" type="text/javascript"></script>
+    <script src="~/Content/Easyui/locale/easyui-lang-zh_CN.js"></script>
+    <link href="~/Content/Easyui/themes/gray/easyui.css" rel="stylesheet" />
+    <link href="~/Content/Easyui/themes/icon.css" rel="stylesheet" />
+    
+    <style type="text/css">
+		body.login { background: #ffffff }
+
+		body.login .wrap {
+			width: 100%;
+			height: 100%;
+			height: auto;
+			min-height: 100%;
+		}
+
+
+		.login .main {
+			width: 486px;
+			height: 100%;
+			margin: 0 auto 0 auto
+		}
+
+		.login-box {
+			position: absolute;
+			bottom: 48%;
+			width: 486px;
+			height: 239px;
+			//background: url(@Url.Content("~/images/loginbj.jpg")) no-repeat;
+		}
+
+		.footer {
+			position: absolute;
+			bottom: 0;
+		}
+
+		.footer ul {
+			background-color: white;
+			list-style: none;
+			margin: 0 auto 0 auto;
+			padding: 0;
+			width: 1680px
+		}
+
+		.footer li {
+			background-color: white;
+			text-align: left;
+		}
+
+
+    </style>
+
+    <script type="text/javascript">
+        $.extend($.fn.validatebox.defaults.rules, {
+            checkCode: {
+                validator: function (value) {
+                    var v = checkCode(value);
+                    //alert(v);g
+                    if (v === "0") {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+                message: '验证码错误'
+            }
+        });
+
+        function checkCode(value) {
+            var r = "0";
+            var postData = {
+                code: value
+            }
+            var url = "@Url.Content("~/Home/Home/CheckCode")";
+            $.ajax({
+                tyep: "post",
+                dataType: "text",
+                async: false, //是否异步执行
+                cache: false,
+                data: postData,
+                url: url,
+                success: function (msg) {
+                    if (msg === "0") {
+                        $.messager.alert('系统提示', '验证码错误', 'error', function () {
+                            ClickRemoveChangeCode();
+                        });
+                    }
+                    r = msg;
+                },
+                error: function (errorMSG) {
+                    r = "0";
+                }
+            });
+            return r;
+        }
+
+        //单击重新改变验证码
+
+        function ClickRemoveChangeCode() {
+            //首先我们获取到验证码的路径
+            var code = $("#imgCode").attr("src");
+            code = code.substring(0, code.indexOf("?"));
+            //然后重新给验证码的路径赋值
+            $("#imgCode").attr("src", code + "?id=" + Math.random());
+            $("#code").textbox("setValue", "");
+        }
+
+        function login() {
+            document.location.href = "@Url.Content("~/Home")";
+        }
+    </script>
+</head>
+<body class="login">
+   
+    <div id="warpper" class="wrap">
+        <div style="width: 100%; height: 90%; float: left; text-align: center">
+            <div id="loginForm" style="width: 310px; height: 100px;  margin: 0 auto 0 auto; position: relative;">
+                <form id="form">
+                    <table id="LoginTb" style="margin-top: 0; background: #fff; width: 100%;">
+                        <tr>
+                            <td style="height: 42px; text-align: center;">
+                                <span>日志管理平台</span> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 42px; text-align: left;">
+                                <input id="UserName" name="UserName" maxlength="30" type="text" value="" style="height: 30px; width: 310px" class="easyui-textbox" data-options="required:true,prompt:'用户名',iconCls:'icon-man',validType:'length[1,30]'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 42px; text-align: left; position: relative">
+                               
+                                <div id="divpsw1"><input id="Password1" name="Password1" maxlength="12" type="text" value="" style="height: 30px; width: 310px" class="easyui-textbox" data-options="prompt:'密码',required:true,iconCls:'icon-lock',validType:'length[1,12]'" /></div>
+                                <div id="divpsw2"><input id="Password2" name="Password2" maxlength="12" type="password" value="" style="height: 30px; width: 310px" class="easyui-textbox" data-options="required:true,iconCls:'icon-lock',validType:'length[1,12]'" /></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 42px; text-align: left; vertical-align:middle">
+                                <input id="code" name="code" type="text" style="height: 30px; width: 200px" class="easyui-textbox" data-options="required:true,prompt:'验证码',validType:['length[5,5]']" />&nbsp;<img src="@Url.Content("~/Home/GetCode?CheckCode?ID=1")" id="imgCode" style="height:28px;width:90px; vertical-align:middle" title="单击可刷新" alt="单击可刷新" onclick=" ClickRemoveChangeCode() "  /><!--a href="javascript:void(0)" onclick=" ClickRemoveChangeCode();return false; ">看不清</a-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="height: 42px">
+                                <a id="LoginSys" href="javascript:void(0)" class="easyui-linkbutton" style="height: 30px; width: 310px" data-options="">登陆</a>
+                            </td>
+                        </tr>
+
+                    </table>
+                </form>
+            </div>
+        </div>
+      
+    </div>
+ 
+    <script type="text/javascript">
+        $(function () {
+            if (top.location !== self.location) {
+                top.location = self.location;
+            }
+            $("#form").form("clear");
+            $('#warpper').height($(document).height()-100);
+            $('#warpper').show();
+          
+            $("#loginForm").css({ display: "block", left: 0, top: (($(document).height() ) /3).toString() + "px" });
+            $('#divpsw2').hide();
+
+
+            $('#Password1').textbox('textbox').bind('focus', function () {
+                $('#divpsw1').hide();
+                $('#divpsw2').show();
+                $('#Password2').textbox('textbox').focus();
+            });
+
+            $('#Password2').textbox('textbox').bind('blur', function () {
+                var a = $('#Password2').textbox('getValue');
+                if (a === "") {
+                    $('#divpsw2').hide();
+                    $('#divpsw1').show();
+                } else {
+                    $('#Password1').textbox('setValue', a);
+                }
+            });
+
+            $('.easyui-textbox').textbox('disableValidation');
+            $('.validatebox-text').bind('blur', function () {
+                $(this).validatebox('enableValidation');
+            });
+            $('.validatebox-text').bind('focus', function () {
+                $(this).validatebox('disableValidation');
+            });
+            $('#LoginSys').click(function () {
+                //login();
+                $('#LoginSys').linkbutton("disable");
+                $('.easyui-textbox').textbox('enableValidation');
+                if ($('#form').form('validate')) {
+                    var postData = {
+                        PK_SysUser: $("#UserName").val(),
+                        Password: $("#Password2").val()
+                    };
+
+                    if (checkCode($("#code").val()) === "0") {
+                        $('#LoginSys').linkbutton("enable");
+                        return false;
+                    }
+                    //发送异步请求实现登录
+                    $.ajax({
+                        type: "post",
+                        data: postData,
+                        url: "@Url.Content("~/Home/Home/CheckSysUser")",
+                        cache: false,
+                        dataType: "html",
+                        async: false,
+                        success: function (data) {
+                            if (data == "OK") {
+
+                                window.location.href = "@Url.Content("~/Home/")";
+
+                            } else {
+                                $.messager.alert('系统提示', data, 'error', function () {
+                                    ClickRemoveChangeCode();
+                                    $('#LoginSys').linkbutton("enable");
+                                    return false;
+                                });
+
+
+                            }
+                        }
+                    });
+                } else {
+                    $('#LoginSys').linkbutton("enable");
+                    $(':focus').blur();
+                    return false;
+                }
+            });
+     
+            $("body").keyup(function (event) {
+                if (event.which == 13) {
+                    $("#LoginSys").trigger("click");
+                }
+            });
+        })
+    </script>
+
+</body>
+</html>
