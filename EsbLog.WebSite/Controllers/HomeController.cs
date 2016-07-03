@@ -31,7 +31,6 @@ namespace EsbLog.WebSite.Controllers
             ValidateCode validateCode = new ValidateCode();
 
             //生成验证码指定的长度
-
             string code = validateCode.CreateValidateCode(5);
 
             //将验证码赋值给Session变量
@@ -44,6 +43,18 @@ namespace EsbLog.WebSite.Controllers
             //最后将验证码返回
 
             return File(bytes, @"image/jpeg");
+        }
+
+        /// <summary>
+        /// 登录验证
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public ActionResult CheckCode(string userName,string password,string code)
+        {
+            return Content("asdfasdf");
         }
 	}
 }

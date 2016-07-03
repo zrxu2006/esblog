@@ -203,25 +203,29 @@
                 $('.easyui-textbox').textbox('enableValidation');
                 if ($('#form').form('validate')) {
                     var postData = {
-                        PK_SysUser: $("#UserName").val(),
-                        Password: $("#Password2").val()
+                        UserName: $("#UserName").val(),
+                        Password: $("#Password2").val(),
+                        Code: $("#code").val()
                     };
 
-                    if (checkCode($("#code").val()) === "0") {
-                        $('#LoginSys').linkbutton("enable");
-                        return false;
-                    }
+                    //if (checkCode($("#code").val()) === "0") {
+                    //    $('#LoginSys').linkbutton("enable");
+                    //    return false;
+                    //}
+
+                    alert('asdf');
                     //发送异步请求实现登录
                     $.ajax({
                         type: "post",
                         data: postData,
-                        url: "@Url.Content("~/Home/Home/CheckSysUser")",
+                        url: "@Url.Action("CheckCode")",
                         cache: false,
                         dataType: "html",
                         async: false,
                         success: function (data) {
+                            alert(data);
                             if (data == "OK") {
-
+                                
                                 window.location.href = "@Url.Content("~/Home/")";
 
                             } else {
