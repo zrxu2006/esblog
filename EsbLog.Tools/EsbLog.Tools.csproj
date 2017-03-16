@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AAABC9FC-DA05-421F-993F-E01BB1739E24}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EsbLog.Tools</RootNamespace>
+    <AssemblyName>EsbLog.Tools</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="HttpRequest\Common\AsyncCallback.cs" />
+    <Compile Include="HttpRequest\Common\AsyncCallResult.cs" />
+    <Compile Include="HttpRequest\Common\BooleanResultInfo.cs" />
+    <Compile Include="HttpRequest\Common\Constants.cs" />
+    <Compile Include="HttpRequest\Common\ErrorResponse.cs" />
+    <Compile Include="HttpRequest\Common\Geo.cs" />
+    <Compile Include="HttpRequest\Common\GeoPoint.cs" />
+    <Compile Include="HttpRequest\Common\HttpMethod.cs" />
+    <Compile Include="HttpRequest\Common\Hyperlink.cs" />
+    <Compile Include="HttpRequest\Common\IResponseErrorHandler.cs" />
+    <Compile Include="HttpRequest\Common\LocalErrorCode.cs" />
+    <Compile Include="HttpRequest\Common\ParamCollection.cs" />
+    <Compile Include="HttpRequest\Common\ParamPair.cs" />
+    <Compile Include="HttpRequest\Common\ResponseErrorData.cs" />
+    <Compile Include="HttpRequest\Common\ResponseErrorEventArgs.cs" />
+    <Compile Include="HttpRequest\Common\RFC3986Encoder.cs" />
+    <Compile Include="HttpRequest\Common\Source.cs" />
+    <Compile Include="HttpRequest\Common\UnreadInfo.cs" />
+    <Compile Include="HttpRequest\HttpGet.cs" />
+    <Compile Include="HttpRequest\HttpPost.cs" />
+    <Compile Include="HttpRequest\HttpRequest.cs" />
+    <Compile Include="HttpRequest\IHttpRequest.cs" />
+    <Compile Include="HttpRequest\MultiPartField.cs" />
+    <Compile Include="HttpRequest\MultiPartHttpPost.cs" />
+    <Compile Include="HttpRequest\NetworkState.cs" />
+    <Compile Include="HttpRequest\ProxyIP.cs" />
+    <Compile Include="HttpRequest\UploadFile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
