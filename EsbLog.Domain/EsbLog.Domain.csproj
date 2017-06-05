@@ -69,6 +69,7 @@
     <Compile Include="Log.cs">
       <DependentUpon>EsbLog.tt</DependentUpon>
     </Compile>
+    <Compile Include="Platform\LoginUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
