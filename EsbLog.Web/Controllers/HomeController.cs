@@ -20,7 +20,7 @@ namespace EsbLog.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            return View();
+            return View(); 
         }
                 
         [AllowAnonymous]
