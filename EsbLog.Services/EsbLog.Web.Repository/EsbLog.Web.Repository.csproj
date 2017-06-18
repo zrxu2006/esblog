@@ -40,15 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concrete\AccountRepository.cs" />
+    <Compile Include="Concrete\AppManagerRepository.cs" />
     <Compile Include="IAccountRepository.cs" />
+    <Compile Include="IAppManagerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\EsbLog.Domain\EsbLog.Domain.csproj">
+      <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
+      <Name>EsbLog.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\EsbLog.Platform.DbContext\EsbLog.Platform.Database.csproj">
       <Project>{70199047-1c62-4325-98ff-53363022b21d}</Project>
       <Name>EsbLog.Platform.Database</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

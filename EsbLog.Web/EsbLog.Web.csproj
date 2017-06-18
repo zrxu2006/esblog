@@ -46,11 +46,11 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject.Web">
-      <HintPath>..\packages\Ninject.Web.3.2.1.0\lib\net45-full\Ninject.Web.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject.Web.Common">
       <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc">
+      <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -68,7 +68,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="WebActivatorEx">
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -131,7 +132,6 @@
     <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -164,9 +164,17 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\EsbLog.Domain\EsbLog.Domain.csproj">
+      <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
+      <Name>EsbLog.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EsbLog.Platform.DbContext\EsbLog.Platform.Database.csproj">
       <Project>{70199047-1c62-4325-98ff-53363022b21d}</Project>
       <Name>EsbLog.Platform.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Services\EsbLog.Web.Repository\EsbLog.Web.Repository.csproj">
+      <Project>{8eab192c-0c4d-4e83-a7ef-637b53cbdcfb}</Project>
+      <Name>EsbLog.Web.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
