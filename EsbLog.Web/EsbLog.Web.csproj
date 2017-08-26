@@ -155,6 +155,8 @@
     <Content Include="Views\AppManage\Index.cshtml" />
     <Content Include="Views\PermissionManage\Index.cshtml" />
     <Content Include="Views\Extension\Index.cshtml" />
+    <Content Include="Views\AppManage\Add.cshtml" />
+    <Content Include="Views\AppManage\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

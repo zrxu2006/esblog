@@ -14,5 +14,10 @@ namespace EsbLog.Web.Controllers
         {
             return View();
         }
+
+        public ActionResult Add()
+        {
+            return View();
+        }
 	}
 }

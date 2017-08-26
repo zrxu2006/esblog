@@ -8,18 +8,18 @@ using EsbLog.Domain.Platform;
 
 namespace EsbLog.Platform.Database.Mapping
 {
-    public class LoginUserMap: EntityMappingConfiguration<LoginUser>
-    {
-        public LoginUserMap()
-        {
-            ToTable("tblLoginUser");
+    //public class LoginUserMap: EntityMappingConfiguration<LoginUser>
+    //{
+    //    public LoginUserMap()
+    //    {
+    //        ToTable("tblLoginUser");
 
-            Requires(l => l.Id);
+    //        Requires(l => l.Id);
 
-            Property(l => l.Id).HasColumnName("Id");
-            Property(l => l.UserName).HasColumnName("UserName");
-            Property(l => l.Password).HasColumnName("Password");
-            Property(l => l.LoginTime).HasColumnName("LoginTime");
-        }
-    }
+    //        Property(l => l.Id).HasColumnName("Id");
+    //        Property(l => l.UserName).HasColumnName("UserName");
+    //        Property(l => l.Password).HasColumnName("Password");
+    //        Property(l => l.LoginTime).HasColumnName("LoginTime");
+    //    }
+    //}
 }

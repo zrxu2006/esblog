@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IConnectionString.cs" />
+    <Compile Include="IPlatformDbContext.cs" />
+    <Compile Include="Mapping\AppMap.cs" />
     <Compile Include="Mapping\LoginUserMap.cs" />
     <Compile Include="PlatformDbContext.cs" />
     <Compile Include="PlatformDbFactory.cs" />
@@ -61,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Account\" />
+    <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EsbLog.Domain\EsbLog.Domain.csproj">

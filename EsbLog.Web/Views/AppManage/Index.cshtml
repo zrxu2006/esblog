@@ -5,7 +5,8 @@
 }
 
 <div class="page-header">
-    <h2>应用管理</h2>
+    <h2>应用管理 <span style="float:right">@Html.ActionLink("新增", "Add", null, new { @class = "btn btn-primary" })</span></h2>
+    
 </div>
 
 <div>
@@ -16,6 +17,7 @@
                 <th>应用名称</th>
                 <th>描述</th>
                 <th>访问key</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,7 @@
                 <td>@app.Name</td>
                 <td>@app.Description</td>
                 <td>@app.PublicKey</td>
+                <td>@Html.ActionLink("编辑", "Edit", new { Id = app.AppId }, new { @class = "btn btn-success" })</td>
             </tr>
         }
             
