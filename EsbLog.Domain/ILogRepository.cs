@@ -8,7 +8,7 @@ namespace EsbLog.Domain
 {
     public interface ILogRepository
     {
-        int Save(Log entity);
-        Task<int> SaveAsync(Log entity);
+        //int Save(Log entity);
+        //Task<int> SaveAsync(Log entity);
     }
 }

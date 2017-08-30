@@ -12,6 +12,7 @@ namespace EsbLog.Web.App_Start
     using Ninject.Web.Common;
     using EsbLog.Web.Repository.Concrete;
     using EsbLog.Web.Repository;
+    using EsbLog.Platform.Database;
 
     public static class NinjectWebCommon 
     {
@@ -64,6 +65,9 @@ namespace EsbLog.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IAppManagerRepository>().To<AppManagerRepository>();
+            kernel.Bind<IConnectionString>().To<PlatformConnectionStringProvider>();
+            kernel.Bind<PlatformDbFactory>().ToMethod(c => new PlatformDbFactory(c.Kernel.Get<IConnectionString>())
+                    ).InSingletonScope();
         }        
     }
 }

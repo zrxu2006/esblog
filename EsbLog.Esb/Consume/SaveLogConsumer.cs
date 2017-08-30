@@ -22,16 +22,17 @@ namespace EsbLog.Esb.Consume
 
         public Task Consume(ConsumeContext<ILogRequested> context)
         {
-            Log log = new Log();
-            log.AppId = context.Message.AppId;
-            log.Level = context.Message.LogLevel;
-            log.Ticks = context.Message.Ticks;
-            log.Content = context.Message.Content;
+            //Log log = new Log();
+            //log.AppId = context.Message.AppId;
+            //log.Level = context.Message.LogLevel;
+            //log.Ticks = context.Message.Ticks;
+            //log.Content = context.Message.Content;
 
-            var repository = new EFLogRepository();
+            //var repository = new EFLogRepository();
 
-            return Task.Run(() => repository.Save(log));
+            //return Task.Run(() => repository.Save(log));
             //return _repository.SaveAsync(log);
+            return Task.Delay(1);
         }
     }
 }

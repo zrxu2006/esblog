@@ -30,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,57 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EFLogRepository.cs" />
-    <Compile Include="EsbLog.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EsbLog.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EsbLog.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EsbLog.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EsbLog.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EsbLog.edmx</DependentUpon>
-    </Compile>
     <Compile Include="ILogRepository.cs" />
-    <Compile Include="Log.cs">
-      <DependentUpon>EsbLog.tt</DependentUpon>
-    </Compile>
     <Compile Include="Platform\App.cs" />
     <Compile Include="Platform\LoginUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="EsbLog.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EsbLog.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="EsbLog.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EsbLog.Context.cs</LastGenOutput>
-      <DependentUpon>EsbLog.edmx</DependentUpon>
-    </None>
-    <None Include="EsbLog.edmx.diagram">
-      <DependentUpon>EsbLog.edmx</DependentUpon>
-    </None>
-    <None Include="EsbLog.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>EsbLog.cs</LastGenOutput>
-      <DependentUpon>EsbLog.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="EsbLog.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

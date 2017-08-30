@@ -33,7 +33,7 @@ namespace EsbLog.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                app.PublicKey = Guid.NewGuid();
+                app.PublicKey = Guid.NewGuid().ToString();
                 _repo.AddApp(app);
                 return RedirectToAction("Index");
             }

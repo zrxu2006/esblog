@@ -17,7 +17,7 @@ namespace EsbLog.Platform.Database
     [DbConfigurationType(typeof(SqlServerProviderConfiguration))]
     public class PlatformDBContext : DbContext,IPlatformDbContext
     {
-        internal PlatformDBContext(string connectString):base(connectString)
+        public PlatformDBContext(string connectString):base(connectString)
         {
         }
 

@@ -1,18 +1,26 @@
 ﻿using EsbLog.Domain.Platform;
+using EsbLog.Platform.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace EsbLog.Web.Repository.Concrete
 {
     public class AppManagerRepository : IAppManagerRepository
     {
+        PlatformDbFactory _factory;
+        public AppManagerRepository(PlatformDbFactory dbFactory)
+        {
+            _factory = dbFactory;            
+        }
+        
         #region MockData
 
         private static List<App> _appList = new List<App>();
-        public AppManagerRepository() { }
+
         static AppManagerRepository()
         {
             _appList.Add(new App
@@ -21,7 +29,7 @@ namespace EsbLog.Web.Repository.Concrete
                 Code = "App01",
                 Description = "App 01 Description",
                 Name = "App Name 01",
-                PublicKey = Guid.NewGuid()
+                PublicKey = Guid.NewGuid().ToString()
             });
 
             _appList.Add(new App
@@ -30,7 +38,7 @@ namespace EsbLog.Web.Repository.Concrete
                 Code = "App02",
                 Description = "App 02 Description",
                 Name = "App Name 02",
-                PublicKey = Guid.NewGuid()
+                PublicKey = Guid.NewGuid().ToString()
             });
 
             _appList.Add(new App
@@ -39,7 +47,7 @@ namespace EsbLog.Web.Repository.Concrete
                 Code = "App03",
                 Description = "App 03 Description",
                 Name = "App Name 03",
-                PublicKey = Guid.NewGuid()
+                PublicKey = Guid.NewGuid().ToString()
             });
 
             _appList.Add(new App
@@ -48,7 +56,7 @@ namespace EsbLog.Web.Repository.Concrete
                 Code = "App04",
                 Description = "App 04 Description",
                 Name = "App Name 04",
-                PublicKey = Guid.NewGuid()
+                PublicKey = Guid.NewGuid().ToString()
             });
 
             _appList.Add(new App
@@ -57,7 +65,7 @@ namespace EsbLog.Web.Repository.Concrete
                 Code = "App05",
                 Description = "App 05 Description",
                 Name = "App Name 05",
-                PublicKey = Guid.NewGuid()
+                PublicKey = Guid.NewGuid().ToString()
             });
 
             _appList.Add(new App
@@ -66,43 +74,56 @@ namespace EsbLog.Web.Repository.Concrete
                 Code = "App06",
                 Description = "App 06 Description",
                 Name = "App Name 06",
-                PublicKey = Guid.NewGuid()
+                PublicKey = Guid.NewGuid().ToString()
             });
         }
-        
+
         #endregion
         public bool AddApp(App app)
         {
-            _appList.Add(app);
+            using (var db = _factory.GetPlatformDb())
+            {
+                db.Apps.Add(app);
+                db.SaveChanges();
+            }
             return true;
         }
 
         public IEnumerable<App> FindAllApps()
         {
-            return _appList;
+            using (var db = _factory.GetPlatformDb())
+            {
+                return db.Apps.ToList();
+            }
         }
 
         public IEnumerable<App> FindApp(Predicate<App> filter)
         {
-            return _appList.Where(a => filter(a));
+            using (var db = _factory.GetPlatformDb())
+            {
+                return db.Apps.Where(a => filter(a)).ToList();
+            }
         }
 
         public bool IsExist(string appcode)
         {
-            throw new NotImplementedException();
+            using (var db = _factory.GetPlatformDb())
+            {
+                return db.Apps.FirstOrDefault(a => a.Code == appcode)!= null;
+            }
         }
 
         public bool EditApp(App app)
         {
-            var appNew = _appList.FirstOrDefault(a => a.AppId == app.AppId);
-            if (appNew == null)
+            using (var db = _factory.GetPlatformDb())
             {
-                _appList.Add(appNew);
-            }
-            else
-            {
-                _appList.Remove(appNew);
-                _appList.Add(app);
+                var editApp = db.Apps.FirstOrDefault(a=> a.AppId==app.AppId);
+
+                editApp.Code = app.Code;
+                editApp.Description = app.Description;
+                editApp.Name = app.Name;
+                editApp.PublicKey = app.PublicKey;
+                db.SaveChanges();                
             }
 
             return true;
