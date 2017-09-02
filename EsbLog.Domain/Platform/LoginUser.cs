@@ -9,8 +9,9 @@ namespace EsbLog.Domain.Platform
     public class LoginUser
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
+        public string LoginName { get; set; }
         public string Password { get; set; }
+        public string UserType { get; set; }
         public DateTime? LoginTime { get; set; } 
     }
 }

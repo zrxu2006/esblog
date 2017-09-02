@@ -63,31 +63,32 @@ namespace EsbLog.Platform.Database
             }
         }
 
-        //public override async Task<int> SaveChangesAsync()
-        //{
-        //    try
-        //    {
-        //        return await base.SaveChangesAsync();
-        //    }
-        //    // TODO: Add extra data exception types, as needed, here
-        //    catch (DbEntityValidationException ex)
-        //    {
-        //        var sb = new StringBuilder();
-        //        sb.AppendLine("Validation failed for one or more entities. Refer to validation errors listed below.");
+        public override async Task<int> SaveChangesAsync()
+        {
+            try
+            {
+                return await base.SaveChangesAsync();
+            }
+            // TODO: Add extra data exception types, as needed, here
+            catch (DbEntityValidationException ex)
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine("Validation failed for one or more entities. Refer to validation errors listed below.");
 
-        //        foreach (var entityError in ex.EntityValidationErrors)
-        //        {
-        //            sb.AppendLine();
-        //            sb.AppendLine(string.Format("Failed to commit [{0}] in the [{1}] state.", entityError.Entry.Entity.GetType().FullName, entityError.Entry.State));
-        //            foreach (var validationError in entityError.ValidationErrors)
-        //                sb.AppendLine(string.Format("\t{0} - {1}", validationError.PropertyName, validationError.ErrorMessage));
-        //        }
+                foreach (var entityError in ex.EntityValidationErrors)
+                {
+                    sb.AppendLine();
+                    sb.AppendLine(string.Format("Failed to commit [{0}] in the [{1}] state.", entityError.Entry.Entity.GetType().FullName, entityError.Entry.State));
+                    foreach (var validationError in entityError.ValidationErrors)
+                        sb.AppendLine(string.Format("\t{0} - {1}", validationError.PropertyName, validationError.ErrorMessage));
+                }
 
-        //        throw new DataException(sb.ToString(), ex);
-        //    }            
-        //}
+                throw new DataException(sb.ToString(), ex);
+            }
+        }
 
         public IDbSet<App> Apps { get; set; }
+        public IDbSet<LoginUser> Users { get; set; }
     }
 
     public class SqlServerProviderConfiguration : DbConfiguration

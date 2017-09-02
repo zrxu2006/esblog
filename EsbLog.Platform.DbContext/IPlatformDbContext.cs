@@ -11,8 +11,9 @@ namespace EsbLog.Platform.Database
     public interface IPlatformDbContext:IDisposable
     {
         IDbSet<App> Apps { get; }
+        IDbSet<LoginUser> Users { get; }
         int SaveChanges();
-        //Task<int> SaveChangesAsync();
+        Task<int> SaveChangesAsync();
         System.Data.Entity.Database Database { get; }
     }
 }

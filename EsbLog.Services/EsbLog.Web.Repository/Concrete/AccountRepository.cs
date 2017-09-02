@@ -16,17 +16,37 @@ namespace EsbLog.Web.Repository.Concrete
             _factory = dbFactory;
         }
 
-        public bool ValidateUser(string username, string password)
+        public int ValidateUser(string username, string password)
         {
             MD5 md5 = MD5.Create();
             var bytes = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
             var md5String = Convert.ToBase64String(bytes);
+            int userId;
+            using (var context = _factory.GetPlatformDb())
+            {
+                var user = context.Users
+                    .FirstOrDefault(u => u.LoginName == username
+                            && u.Password == md5String
+                            && u.UserType == "Manager");
+                userId = user==null?0:user.Id;                
+            }
 
-            //using (DbContext context = _factory.GetPlatformDb())
-            //{
-            //    //context.Users
-            //}
-            return true;
+            return userId;
+        }
+
+
+        public void UpdateLoginTime(int userId)
+        {
+            using (var context = _factory.GetPlatformDb())
+            {
+                var user = context.Users
+                            .FirstOrDefault(u=>u.Id==userId);
+                if (user != null)
+                {
+                    user.LoginTime = DateTime.Now;
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }
