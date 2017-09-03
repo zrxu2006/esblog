@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace EsbLog.Web.Controllers
 {
@@ -38,6 +39,7 @@ namespace EsbLog.Web.Controllers
             {
                 Session["User"] = user;
                 _repo.UpdateLoginTime(userId);
+                FormsAuthentication.SetAuthCookie(user.UserName, false);
                 return RedirectToAction("Index", "Account");
             }
             else

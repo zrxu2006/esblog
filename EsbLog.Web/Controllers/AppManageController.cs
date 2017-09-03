@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace EsbLog.Web.Controllers
 {
+    [Authorize]
     public class AppManageController : Controller
     {
         IAppManagerRepository _repo;

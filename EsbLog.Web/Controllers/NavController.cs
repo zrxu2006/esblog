@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace EsbLog.Web.Controllers
 {
+    [Authorize]
     public class NavController : Controller
     {
         private readonly static List<NavViewModel> _navMenu
