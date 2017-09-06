@@ -27,6 +27,7 @@ namespace EsbLog.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            
             return View(); 
         }
                 
@@ -49,6 +50,14 @@ namespace EsbLog.Web.Controllers
             }
             
             //return Content(string.Format("{0},{1},{2}",user.UserName,user.Password,user.RememberMe));
+        }
+
+        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session["User"] = null;
+            return RedirectToAction("Login");
         }
 	}
 }

@@ -46,6 +46,12 @@ namespace EsbLog.Web.Controllers
         public ActionResult Menu(string selectedNav = null)
         {
             ViewBag.SelectedNav = selectedNav;
+            var user = Session["User"] as LoginUserViewModel;
+            if(user!=null)
+            {
+                ViewBag.UserName = user.UserName;
+            }
+           
             return PartialView(GetNavMenu());
         }
 	}
