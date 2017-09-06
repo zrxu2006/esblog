@@ -44,6 +44,7 @@ namespace EsbLog.Web.Controllers
             }
             else
             {
+                ModelState.AddModelError("", "用户名或者密码错误");
                 return View();
             }
             
