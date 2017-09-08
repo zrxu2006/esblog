@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NLog;
 
 namespace EsbLog.Web.Controllers
 {
     [Authorize]
     public class AppManageController : Controller
     {
+        private static Logger _logger = LogManager.GetCurrentClassLogger();
         IAppManagerRepository _repo;
         public AppManageController(IAppManagerRepository repo)
         {
@@ -21,6 +23,7 @@ namespace EsbLog.Web.Controllers
         // GET: /AppManage/
         public ActionResult Index()
         {
+            _logger.Trace("test");
             return View(_repo.FindAllApps());
         }
 
