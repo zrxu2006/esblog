@@ -6,10 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NLog;
+using EsbLog.Web.Infrastructure;
 
 namespace EsbLog.Web.Controllers
 {
-    [Authorize]
+    [EsblogAuth]
     public class AppManageController : Controller
     {
         private static Logger _logger = LogManager.GetCurrentClassLogger();

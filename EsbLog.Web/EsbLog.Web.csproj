@@ -155,6 +155,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\EsblogAuthAttribute.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
     <Compile Include="Models\NavViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

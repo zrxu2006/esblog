@@ -1,4 +1,5 @@
-﻿using EsbLog.Web.Models;
+﻿using EsbLog.Web.Infrastructure;
+using EsbLog.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace EsbLog.Web.Controllers
 {
-    [Authorize]
+    [EsblogAuth]
     public class NavController : Controller
     {
         private readonly static List<NavViewModel> _navMenu
@@ -46,11 +47,7 @@ namespace EsbLog.Web.Controllers
         public ActionResult Menu(string selectedNav = null)
         {
             ViewBag.SelectedNav = selectedNav;
-            var user = Session["User"] as LoginUserViewModel;
-            if(user!=null)
-            {
-                ViewBag.UserName = user.UserName;
-            }
+            ViewBag.UserName = this.User.Identity.Name;
            
             return PartialView(GetNavMenu());
         }

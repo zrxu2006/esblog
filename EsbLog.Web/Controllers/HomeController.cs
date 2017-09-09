@@ -25,23 +25,25 @@ namespace EsbLog.Web.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
-            
+            ViewBag.ReturnUrl = returnUrl;
             return View(); 
         }
                 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(LoginUserViewModel user)
+        public ActionResult Login(LoginUserViewModel user,string returnUrl)
         {
             int userId = _repo.ValidateUser(user.UserName, user.Password);
             if (userId>0)
             {
-                Session["User"] = user;
+                //Session["User"] = user;
                 _repo.UpdateLoginTime(userId);
                 FormsAuthentication.SetAuthCookie(user.UserName, false);
-                return RedirectToAction("Index", "Account");
+                return Redirect(string.IsNullOrEmpty(returnUrl)
+                                    ? Url.Action("Index", "Account")
+                                    : returnUrl);
             }
             else
             {
@@ -56,7 +58,7 @@ namespace EsbLog.Web.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            Session["User"] = null;
+            //Session["User"] = null;
             return RedirectToAction("Login");
         }
 	}
