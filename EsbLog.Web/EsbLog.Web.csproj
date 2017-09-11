@@ -144,6 +144,7 @@
     <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -156,6 +157,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\EsblogAuthAttribute.cs" />
+    <Compile Include="Infrastructure\EsblogExceptionFilterAttribute.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
     <Compile Include="Models\NavViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

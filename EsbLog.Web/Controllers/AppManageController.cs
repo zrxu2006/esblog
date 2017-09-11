@@ -24,7 +24,6 @@ namespace EsbLog.Web.Controllers
         // GET: /AppManage/
         public ActionResult Index()
         {
-            _logger.Trace("test");
             return View(_repo.FindAllApps());
         }
 
