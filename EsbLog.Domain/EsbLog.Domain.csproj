@@ -46,6 +46,7 @@
     <Compile Include="ILogRepository.cs" />
     <Compile Include="Platform\App.cs" />
     <Compile Include="Platform\LoginUser.cs" />
+    <Compile Include="Platform\Permission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

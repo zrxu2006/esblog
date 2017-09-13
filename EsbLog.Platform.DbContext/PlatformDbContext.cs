@@ -89,6 +89,7 @@ namespace EsbLog.Platform.Database
 
         public IDbSet<App> Apps { get; set; }
         public IDbSet<LoginUser> Users { get; set; }
+        public IDbSet<Permission> Permissions { get; set; }
     }
 
     public class SqlServerProviderConfiguration : DbConfiguration

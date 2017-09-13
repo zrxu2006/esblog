@@ -14,5 +14,12 @@ namespace EsbLog.Web.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
 	}
 }

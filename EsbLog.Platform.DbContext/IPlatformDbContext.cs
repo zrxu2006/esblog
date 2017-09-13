@@ -12,6 +12,7 @@ namespace EsbLog.Platform.Database
     {
         IDbSet<App> Apps { get; }
         IDbSet<LoginUser> Users { get; }
+        IDbSet<Permission> Permissions { get; }
         int SaveChanges();
         Task<int> SaveChangesAsync();
         System.Data.Entity.Database Database { get; }

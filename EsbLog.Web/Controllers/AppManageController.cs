@@ -20,6 +20,7 @@ namespace EsbLog.Web.Controllers
             _repo = repo;
 
         }
+
         //
         // GET: /AppManage/
         public ActionResult Index()

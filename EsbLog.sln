@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsbLog.Web", "EsbLog.Web\Es
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsbLog.Web.Repository", "EsbLog.Services\EsbLog.Web.Repository\EsbLog.Web.Repository.csproj", "{8EAB192C-0C4D-4E83-A7EF-637B53CBDCFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsbLog.Platform.Database.UnitTest", "EsbLog.Platform.Database.UnitTest\EsbLog.Platform.Database.UnitTest.csproj", "{CE817829-E939-46CE-8716-9ABE68979D9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{8EAB192C-0C4D-4E83-A7EF-637B53CBDCFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EAB192C-0C4D-4E83-A7EF-637B53CBDCFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EAB192C-0C4D-4E83-A7EF-637B53CBDCFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE817829-E939-46CE-8716-9ABE68979D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE817829-E939-46CE-8716-9ABE68979D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE817829-E939-46CE-8716-9ABE68979D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE817829-E939-46CE-8716-9ABE68979D9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,5 +96,6 @@ Global
 		{70199047-1C62-4325-98FF-53363022B21D} = {A2B9A86A-2EF0-40B2-9B3E-399E5E275EBA}
 		{EEC7276D-C9DD-47CC-843E-54BF42F3F979} = {A2B9A86A-2EF0-40B2-9B3E-399E5E275EBA}
 		{8EAB192C-0C4D-4E83-A7EF-637B53CBDCFB} = {A2B9A86A-2EF0-40B2-9B3E-399E5E275EBA}
+		{CE817829-E939-46CE-8716-9ABE68979D9A} = {A2B9A86A-2EF0-40B2-9B3E-399E5E275EBA}
 	EndGlobalSection
 EndGlobal

@@ -53,6 +53,7 @@
     <Compile Include="IPlatformDbContext.cs" />
     <Compile Include="Mapping\AppMap.cs" />
     <Compile Include="Mapping\LoginUserMap.cs" />
+    <Compile Include="Mapping\PermissionMap.cs" />
     <Compile Include="PlatformDbContext.cs" />
     <Compile Include="PlatformDbFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

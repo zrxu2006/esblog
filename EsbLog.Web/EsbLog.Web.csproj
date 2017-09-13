@@ -110,6 +110,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Matrix\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\Matrix\css\bootstrap.min.css" />
+    <Content Include="Content\Matrix\css\font-awesome.css" />
+    <Content Include="Content\Matrix\css\font-awesome.min.css" />
+    <Content Include="Content\Matrix\css\fullcalendar.css" />
+    <Content Include="Content\Matrix\css\jquery.gritter.css" />
+    <Content Include="Content\Matrix\css\matrix-login.css" />
+    <Content Include="Content\Matrix\css\matrix-media.css" />
+    <Content Include="Content\Matrix\css\matrix-style.css" />
     <Content Include="Content\signin.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
@@ -172,6 +181,7 @@
     <Content Include="Views\Extension\Index.cshtml" />
     <Content Include="Views\AppManage\Add.cshtml" />
     <Content Include="Views\AppManage\Edit.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -179,7 +189,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Matrix\js\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EsbLog.Domain\EsbLog.Domain.csproj">
       <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
