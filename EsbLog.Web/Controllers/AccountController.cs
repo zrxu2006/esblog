@@ -61,5 +61,11 @@ namespace EsbLog.Web.Controllers
         {
             return Content("TODO :" + recoverEmail);
         }
+
+        [AllowAnonymous]
+        public ActionResult Test()
+        {
+            return View();
+        }
 	}
 }

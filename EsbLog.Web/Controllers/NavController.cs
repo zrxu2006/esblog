@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace EsbLog.Web.Controllers
 {
@@ -50,6 +51,19 @@ namespace EsbLog.Web.Controllers
             ViewBag.UserName = this.User.Identity.Name;
            
             return PartialView(GetNavMenu());
+        }
+        [AllowAnonymous]
+        public ActionResult MatrixMenu(string selectedNav = null)
+        {
+            ViewBag.SelectedNav = selectedNav;
+            ViewBag.UserName = this.User.Identity.Name;
+
+            return PartialView(GetNavMenu());
+        }
+        [AllowAnonymous]
+        public ActionResult MatrixContentHeader(RouteData routeData) 
+        {
+            return PartialView(routeData.Values);
         }
 	}
 }

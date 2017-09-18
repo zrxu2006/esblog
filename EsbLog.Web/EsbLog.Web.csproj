@@ -111,7 +111,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Matrix\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\Matrix\css\bootstrap-wysihtml5.css" />
     <Content Include="Content\Matrix\css\bootstrap.min.css" />
+    <Content Include="Content\Matrix\css\colorpicker.css" />
+    <Content Include="Content\Matrix\css\datepicker.css" />
     <Content Include="Content\Matrix\css\font-awesome.css" />
     <Content Include="Content\Matrix\css\font-awesome.min.css" />
     <Content Include="Content\Matrix\css\fullcalendar.css" />
@@ -119,6 +122,23 @@
     <Content Include="Content\Matrix\css\matrix-login.css" />
     <Content Include="Content\Matrix\css\matrix-media.css" />
     <Content Include="Content\Matrix\css\matrix-style.css" />
+    <Content Include="Content\Matrix\css\select2.css" />
+    <Content Include="Content\Matrix\css\uniform.css" />
+    <Content Include="Content\Matrix\js\bootstrap-colorpicker.js" />
+    <Content Include="Content\Matrix\js\bootstrap-datepicker.js" />
+    <Content Include="Content\Matrix\js\bootstrap-wysihtml5.js" />
+    <Content Include="Content\Matrix\js\bootstrap.min.js" />
+    <Content Include="Content\Matrix\js\jquery.min.js" />
+    <Content Include="Content\Matrix\js\jquery.peity.min.js" />
+    <Content Include="Content\Matrix\js\jquery.toggle.buttons.js" />
+    <Content Include="Content\Matrix\js\jquery.ui.custom.js" />
+    <Content Include="Content\Matrix\js\jquery.uniform.js" />
+    <Content Include="Content\Matrix\js\masked.js" />
+    <Content Include="Content\Matrix\js\matrix.form_common.js" />
+    <Content Include="Content\Matrix\js\matrix.js" />
+    <Content Include="Content\Matrix\js\matrix.login.js" />
+    <Content Include="Content\Matrix\js\select2.min.js" />
+    <Content Include="Content\Matrix\js\wysihtml5-0.3.0.js" />
     <Content Include="Content\signin.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
@@ -135,6 +155,12 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Matrix\font\fontawesome-webfont.eot" />
+    <Content Include="Content\Matrix\font\fontawesome-webfont.svg" />
+    <Content Include="Content\Matrix\font\fontawesome-webfont.ttf" />
+    <Content Include="Content\Matrix\font\fontawesome-webfont.woff" />
+    <Content Include="Content\Matrix\font\fontawesome-webfont.woff2" />
+    <Content Include="Content\Matrix\font\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -166,7 +192,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\EsblogAuthAttribute.cs" />
+    <Compile Include="Infrastructure\EsblogContentHeaderCollection.cs" />
     <Compile Include="Infrastructure\EsblogExceptionFilterAttribute.cs" />
+    <Compile Include="Models\ContentHeaderViewModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
     <Compile Include="Models\NavViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,6 +210,10 @@
     <Content Include="Views\AppManage\Add.cshtml" />
     <Content Include="Views\AppManage\Edit.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_MatrixLayout.cshtml" />
+    <Content Include="Views\Account\Test.cshtml" />
+    <Content Include="Views\Nav\MatrixMenu.cshtml" />
+    <Content Include="Views\Nav\MatrixContentHeader.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -189,9 +221,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\Matrix\js\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EsbLog.Domain\EsbLog.Domain.csproj">
       <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
