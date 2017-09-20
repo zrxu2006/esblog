@@ -124,6 +124,7 @@
     <Content Include="Content\Matrix\css\matrix-style.css" />
     <Content Include="Content\Matrix\css\select2.css" />
     <Content Include="Content\Matrix\css\uniform.css" />
+    <Content Include="Content\Matrix\img\breadcrumb.png" />
     <Content Include="Content\Matrix\js\bootstrap-colorpicker.js" />
     <Content Include="Content\Matrix\js\bootstrap-datepicker.js" />
     <Content Include="Content\Matrix\js\bootstrap-wysihtml5.js" />
@@ -179,6 +180,7 @@
     <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\EsblogWebConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -194,6 +196,7 @@
     <Compile Include="Infrastructure\EsblogAuthAttribute.cs" />
     <Compile Include="Infrastructure\EsblogContentHeaderCollection.cs" />
     <Compile Include="Infrastructure\EsblogExceptionFilterAttribute.cs" />
+    <Compile Include="Models\ContentHeaderDisplayViewModel.cs" />
     <Compile Include="Models\ContentHeaderViewModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
     <Compile Include="Models\NavViewModel.cs" />
@@ -212,8 +215,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_MatrixLayout.cshtml" />
     <Content Include="Views\Account\Test.cshtml" />
-    <Content Include="Views\Nav\MatrixMenu.cshtml" />
     <Content Include="Views\Nav\MatrixContentHeader.cshtml" />
+    <Content Include="Views\Nav\MatrixMenu.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

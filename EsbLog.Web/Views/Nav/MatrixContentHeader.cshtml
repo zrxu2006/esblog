@@ -1,5 +1,17 @@
-﻿@model System.Web.Routing.RouteValueDictionary
+﻿@model EsbLog.Web.Models.ContentHeaderDisplayViewModel
 
-@Html.ActionLink("1","Home","Index")
-|
-@Html.ActionLink("2","Home","index")
+@foreach (var m in Model.Headers.OrderBy(h => h.HeaderLevel))
+{
+    if (m.HeaderLevel == EsbLog.Web.Models.HeaderLevelEnum.Menu)
+    {
+        <a href="@Url.Action(m.ActionName,m.ControllerName)" class="tip-bottom">
+            <i class="icon-home"></i> @m.HeaderName
+        </a>
+    }
+    else if (m.ActionName.ToLower()
+            == Model.RouteValues["action"]
+                .ToString().ToLower())
+    {
+       <a href="javascript:void()">@m.HeaderName</a>         
+    }
+}

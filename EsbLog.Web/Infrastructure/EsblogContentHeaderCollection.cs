@@ -13,13 +13,21 @@ namespace EsbLog.Web.Infrastructure
         {
             
         }
+
+        public void Register(Func<IEnumerable<ContentHeaderViewModel>> provider)
+        {
+            foreach (var h in provider())
+            {
+                Add(h);
+            }
+        }
     }
 
     public class EsblogConfig
     {
         private static EsblogContentHeaderCollection _contentHeaders;
         
-        private static EsblogConfig()
+        static EsblogConfig()
         {
             _contentHeaders = new EsblogContentHeaderCollection();
 
@@ -29,12 +37,5 @@ namespace EsbLog.Web.Infrastructure
             get { return _contentHeaders; }
         }
 
-        public static void RegisterContentHeaders(Func<IEnumerable<ContentHeaderViewModel>> provider)
-        {
-            foreach (var h in provider())
-            {
-                _contentHeaders.Add(h);
-            }
-        }
     }
 }

@@ -11,6 +11,7 @@ namespace EsbLog.Web.Models
         public string Category { get; set; }
         public string ControllerName { get; set; }
         public string ActionName { get; set; }
-        public IEnumerable<NavViewModel> NavItems { get; set; }
+        public bool IsActive { get; set; }
+        //public IEnumerable<NavViewModel> NavItems { get; set; }
     }
 }

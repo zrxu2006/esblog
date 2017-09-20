@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EsbLog.Web.Models.NavViewModel>
+
+@{
+    Dictionary<string, string> _iconDict = new Dictionary<string, string>();
+
+    _iconDict.Add("AppManage".ToUpper(), "icon icon-key");
+    _iconDict.Add("PermissionManage".ToUpper(), "icon icon-lock");
+    _iconDict.Add("Extension".ToUpper(), "icon icon-cogs");
+}
+<div id="sidebar">
+
+    <ul>
+        <li><a href="#"><i class="icon icon-home"></i> <span>首页</span></a> </li>
+
+        @foreach (var c in Model)
+        {            
+            <li class='@c.IsActive? "active":""'>
+                <a href=@Url.Action(c.ActionName,c.ControllerName)><i class='@_iconDict[c.ControllerName.ToUpper()]'></i>@c.NavName</a>
+            </li>
+        }
+        
+        @*<li class="active"><a href="buttons.html"><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span></a></li>
+
+            <li class="submenu open">
+                <a href="#"><i class="icon icon-list"></i> <span>应用管理</span> <span class="label label-important">3</span></a>
+                <ul>
+                    <li class="active"><a href="form-common.html">> 查询</a></li>
+                    <li><a href="form-validation.html">> 新增 & 编辑</a></li>
+                </ul>
+            </li>
+
+            <li class="submenu">
+                <a href="#"><i class="icon icon-list"></i> <span>权限管理</span> <span class="label label-important">3</span></a>
+                <ul>
+                    <li class=""><a href="form-common.html">> 查询</a></li>
+                    <li><a href="form-validation.html">> 新增 & 编辑</a></li>
+                </ul>
+            </li>
+
+            <li class="submenu">
+                <a href="#"><i class="icon icon-list"></i> <span>扩展管理</span> <span class="label label-important">3</span></a>
+                <ul>
+                    <li class=""><a href="form-common.html">> 查询</a></li>
+                    <li><a href="form-validation.html">> 新增 & 编辑</a></li>
+                </ul>
+            </li>*@
+
+
+    </ul>
+</div>

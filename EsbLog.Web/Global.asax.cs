@@ -1,4 +1,5 @@
 ﻿using EsbLog.Web.App_Start;
+using EsbLog.Web.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace EsbLog.Web
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            EsblogWebConfig.RegisterContentHeader(EsblogConfig.ContentHeaders);
         }
     }
 }

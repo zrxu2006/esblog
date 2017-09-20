@@ -53,17 +53,26 @@ namespace EsbLog.Web.Controllers
             return PartialView(GetNavMenu());
         }
         [AllowAnonymous]
-        public ActionResult MatrixMenu(string selectedNav = null)
+        public ActionResult MatrixMenu(string controller = null)
         {
-            ViewBag.SelectedNav = selectedNav;
-            ViewBag.UserName = this.User.Identity.Name;
-
+            //ViewBag.SelectedNav = selectedNav;
+            //ViewBag.UserName = this.User.Identity.Name;
+            var menuList = GetNavMenu();
+            foreach (var m in menuList)
+            {
+                m.IsActive = string.Equals(m.ControllerName, controller, StringComparison.OrdinalIgnoreCase);
+            }
             return PartialView(GetNavMenu());
         }
         [AllowAnonymous]
         public ActionResult MatrixContentHeader(RouteData routeData) 
         {
-            return PartialView(routeData.Values);
+            var model = new ContentHeaderDisplayViewModel();
+            model.Headers = EsblogConfig.ContentHeaders
+                            .Where(c => c.ControllerName.ToUpper() 
+                                    == routeData.Values["controller"].ToString().ToUpper());
+            model.RouteValues = routeData.Values;
+            return PartialView(model);
         }
 	}
 }
