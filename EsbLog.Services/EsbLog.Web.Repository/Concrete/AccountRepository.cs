@@ -27,7 +27,7 @@ namespace EsbLog.Web.Repository.Concrete
                 var user = context.Users
                     .FirstOrDefault(u => u.LoginName == username
                             && u.Password == md5String
-                            && u.UserType == "Manager");
+                            && u.UserType == "M");
                 userId = user==null?0:user.Id;                
             }
 

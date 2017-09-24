@@ -46,6 +46,28 @@ namespace EsbLog.Web.App_Start
             headers.Add(new ContentHeaderViewModel
             {
                 ActionName = "Index",
+                ControllerName = "PermissionManage",
+                HeaderLevel = HeaderLevelEnum.Menu,
+                HeaderName = "权限管理"
+            });
+            headers.Add(new ContentHeaderViewModel
+            {
+                ActionName = "Add",
+                ControllerName = "PermissionManage",
+                HeaderLevel = HeaderLevelEnum.SubMenu,
+                HeaderName = "新增"
+            });
+
+            headers.Add(new ContentHeaderViewModel
+            {
+                ActionName = "Edit",
+                ControllerName = "PermissionManage",
+                HeaderLevel = HeaderLevelEnum.SubMenu,
+                HeaderName = "编辑"
+            });
+            headers.Add(new ContentHeaderViewModel
+            {
+                ActionName = "Index",
                 ControllerName = "Account",
                 HeaderLevel = HeaderLevelEnum.Menu,
                 HeaderName = "账户管理"

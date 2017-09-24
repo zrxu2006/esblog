@@ -18,9 +18,9 @@ namespace EsbLog.Platform.Database
         public PlatformConnectionStringProvider()
         {
             _builder = new SqlConnectionStringBuilder();
-            _builder.DataSource = "mssqlserver";
-            _builder.InitialCatalog = "EsbLog";
-            _builder.IntegratedSecurity = false;
+            _builder.DataSource = "localhost";
+            _builder.InitialCatalog = "esblog";
+            _builder.IntegratedSecurity = true;
             //_builder.UserID = "sa";
             //_builder.Password = "sysadmin";
             _builder.UserID = "EsblogApp";

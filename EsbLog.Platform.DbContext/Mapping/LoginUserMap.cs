@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Entity.ModelConfiguration.Configuration;
 using EsbLog.Domain.Platform;
 using System.Data.Entity.ModelConfiguration;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EsbLog.Platform.Database.Mapping
 {
@@ -17,7 +18,8 @@ namespace EsbLog.Platform.Database.Mapping
 
             HasKey(l => l.Id);
 
-            Property(l => l.Id).HasColumnName("Id");
+            Property(l => l.Id).HasColumnName("Id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(l => l.LoginName).HasColumnName("LoginName");
             Property(l => l.Password).HasColumnName("Password");
             Property(l => l.LoginTime).HasColumnName("LoginTime");

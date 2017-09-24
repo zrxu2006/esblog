@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/Content/Matrix/css/matrix-style.css" />
     <link rel="stylesheet" href="~/Content/Matrix/css/matrix-media.css" />
     <title>@ViewBag.Title</title>
-    
+    @RenderSection("css",false)
     @*<link rel="stylesheet" href="~/Content/Matrix/css/colorpicker.css" />
     <link rel="stylesheet" href="~/Content/Matrix/css/datepicker.css" />
     <link rel="stylesheet" href="~/Content/Matrix/css/uniform.css" />
@@ -68,14 +68,14 @@
     <!--close-left-menu-stats-sidebar-->
 
     <div id="content">
-        <div id="content-header">            
+        @*<div id="content-header">            
                 <div id="breadcrumb">
                     @Html.Action("MatrixContentHeader", "Nav", new { RouteData = this.ViewContext.RouteData })
                 </div>
                 <h1>@RenderSection("ContentHeader",false)</h1>
-        </div>
+        </div>*@
         <div class="container-fluid">
-            <hr>
+            @*<hr>*@
             @RenderBody()           
         </div>
     </div>
@@ -90,7 +90,7 @@
     <script src="~/Content/Matrix/js/jquery.ui.custom.js"></script>
     <script src="~/Content/Matrix/js/bootstrap.min.js"></script>
     <script src="~/Content/Matrix/js/matrix.js"></script>
-    <script src="~/Content/Matrix/js/matrix.form_common.js"></script>
+    @*<script src="~/Content/Matrix/js/matrix.form_common.js"></script>*@
     @*<script src="~/Content/Matrix/js/bootstrap-colorpicker.js"></script>
     <script src="~/Content/Matrix/js/bootstrap-datepicker.js"></script>
     <script src="~/Content/Matrix/js/jquery.toggle.buttons.js"></script>
@@ -104,6 +104,7 @@
     <script>
         $('.textarea_editor').wysihtml5();
     </script>*@
+    @RenderSection("scripts",false)
 </body>
 </html>
 

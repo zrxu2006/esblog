@@ -12,7 +12,9 @@ namespace EsbLog.Web.Infrastructure
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {
-            if (!filterContext.Principal.Identity.IsAuthenticated)
+            if (!filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), true)
+                //&& !filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute),true)
+                && !filterContext.Principal.Identity.IsAuthenticated)
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
@@ -20,12 +22,13 @@ namespace EsbLog.Web.Infrastructure
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
         {
-            if (filterContext.Result == null ||
+            if ((filterContext.Result == null ||
                 filterContext.Result is HttpUnauthorizedResult)
+                && filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute),true))
             {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary{
-                        {"controller","Home" },
+                        {"controller","Account" },
                         {"action","Login"},
                         {"returnUrl",filterContext.HttpContext.Request.RawUrl}
                     });
