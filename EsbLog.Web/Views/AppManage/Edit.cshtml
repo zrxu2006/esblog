@@ -4,12 +4,97 @@
     ViewBag.Title = "编辑应用";
 }
 
-<h2>编辑</h2>
+@section css{
+    <link rel="stylesheet" href="~/Content/Matrix/css/uniform.css" />
+    <link rel="stylesheet" href="~/Content/Matrix/css/select2.css" />
+}
+@section scripts{
+    <script src="~/Content/Matrix/js/jquery.uniform.js"></script>
+    <script src="~/Content/Matrix/js/select2.min.js"></script>
+    <script src="~/Content/Matrix/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Matrix/js/matrix.tables.js"></script>
+}
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>编辑应用</h5>
+            </div>
+            <div class="widget-content nopadding">
+                @using (Html.BeginForm("Edit", "AppManage", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="control-group">
+                        <label class="control-label">应用名称</label>
+                        <div class="controls">
+                            <input type="text" name="Name" value="@Model.Name" class="span11" placeholder="请输入应用名称">
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(model => model.AppId)
+                    
+                    <div class="control-group">
+                        <label class="control-label">应用编号</label>
+                        <div class="controls">
+                            <input type="text" name="Code" value="@Model.Code" class="span11" placeholder="请输入应用编号">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">描述</label>
+                        <div class="controls">
+                            <textarea name="Description" class="span11" placeholder="请输入描述">@Model.Description</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">访问Key</label>
+                        <div class="controls">
+                            <input type="text" disabled="disabled" value="@Model.PublicKey" class="span11">
+                        </div>
+                    </div>
+                    @Html.HiddenFor(model => model.PublicKey)           
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">保存</button>
+                        
+                        @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-primary" })
+                        @*<button type="submit" class="btn btn-success">保存</button>*@
+                    </div>
+                }
+
+                @if (TempData.ContainsKey("success"))
+                {
+                    if ((bool)TempData["success"])
+                    {
+                        <div class="alert alert-success">
+                            <button class="close" data-dismiss="alert">×</button>
+                            <strong>保存成功!</strong> 
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-error">
+                            <button class="close" data-dismiss="alert">×</button>
+                            <strong>保存失败!</strong>
+                        </div>
+                    }
+                }
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<h2>编辑</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>应用</h4>
         <hr />
@@ -57,4 +142,4 @@
 
 <div>
     @Html.ActionLink("返回", "Index")
-</div>
+</div>*@

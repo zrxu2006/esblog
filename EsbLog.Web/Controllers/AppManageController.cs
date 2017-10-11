@@ -40,7 +40,7 @@ namespace EsbLog.Web.Controllers
             {
                 app.PublicKey = Guid.NewGuid().ToString();
                 _repo.AddApp(app);
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = app.AppId });
             }
             return View(app);
         }
@@ -61,15 +61,19 @@ namespace EsbLog.Web.Controllers
         [HttpPost]
         public ActionResult Edit(App app)
         {
+            bool isSuccess = false;
+
             if (ModelState.IsValid)
             {
-                _repo.EditApp(app);
-                return RedirectToAction("Index");
+                isSuccess = _repo.EditApp(app);                
             }
-            else
-            {
-                return RedirectToAction("Edit", new { id = app.AppId });
-            }
+            TempData.Add("success", isSuccess);
+            
+            return View(app);
+            //else
+            //{
+            //    return RedirectToAction("Edit", new { id = app.AppId });
+            //}
         }
 	}
 }
