@@ -51,9 +51,10 @@ hr{ border-top-color:#dadada;}
 	position: relative;
 	width: 100%;
 	z-index: -9;
+    height: 38px;
 }
 #header h1 {
-	background: url("../img/logo.png") no-repeat scroll 0 0 transparent;
+	/*background: url("../img/logo.png") no-repeat scroll 0 0 transparent;*/
 	height: 31px;
 	left: 20px;
 	line-height: 600px;
@@ -94,7 +95,8 @@ hr{ border-top-color:#dadada;}
 /* Top user navigation */
 #user-nav {
 	position: absolute;
-	left: 220px;
+	/*left: 220px;*/
+    right:10px;
 	top:0px;
 	z-index: 20;
 	margin: 0;
