@@ -63,6 +63,13 @@ namespace EsbLog.Web.Controllers
         }
 
         [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
+
+        [AllowAnonymous]
         public ActionResult Test()
         {
             return View();

@@ -1,4 +1,5 @@
 ﻿using EsbLog.Domain.Platform;
+using EsbLog.Web.Infrastructure;
 using EsbLog.Web.Models;
 using EsbLog.Web.Repository;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace EsbLog.Web.Controllers
 {
+    [EsblogAuth]
     public class PermissionManageController : Controller
     {
         IAppManagerRepository _appRepo;
