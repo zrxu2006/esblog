@@ -1,10 +1,12 @@
-﻿using EsbLog.Platform.Database;
+﻿using EsbLog.Domain.Platform;
+using EsbLog.Platform.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace EsbLog.Web.Repository.Concrete
 {
@@ -47,6 +49,23 @@ namespace EsbLog.Web.Repository.Concrete
                     context.SaveChanges();
                 }
             }
+        }
+               
+        public IEnumerable<LoginUser> FindUsers()
+        {
+            using (var context = _factory.GetPlatformDb())
+            {
+                var users = context.Users
+                            .Include(u=>u.Apps)
+                            .Where(u => u.UserType=="U")
+                            .ToList();
+                return users;
+            }
+        }
+
+        public bool BindUserApp(int userId, IEnumerable<int> appIdList)
+        {
+            return true;
         }
     }
 }

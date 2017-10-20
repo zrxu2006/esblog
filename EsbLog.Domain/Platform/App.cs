@@ -9,6 +9,10 @@ namespace EsbLog.Domain.Platform
 {
     public class App
     {
+        public App()
+        {
+            //Permissions = new HashSet<Permission>();
+        }
         [Display(Name="应用名称")]
         public string Name { get; set; }
         public int AppId { get; set; }
@@ -18,6 +22,8 @@ namespace EsbLog.Domain.Platform
         public string Description { get; set; }
 
         public string PublicKey { get; set; }
+        //public int? UserId { get; set; }
+        public virtual LoginUser User { get; set; }
 
     }
 }

@@ -14,28 +14,21 @@ namespace EsbLog.Web.Controllers
     public class PermissionManageController : Controller
     {
         IAppManagerRepository _appRepo;
-        public PermissionManageController(IAppManagerRepository appRepository)
+        IPermissionRepository _perRepo;
+        IAccountRepository _accountRepo;
+        public PermissionManageController(IAppManagerRepository appRepository,
+                IAccountRepository accountRepo)
         {
             _appRepo = appRepository;
+            _accountRepo = accountRepo;
         }
-        //
+
         // GET: /Permission/
         public ActionResult Index()
         {
-            App a = new App
-            {
-                AppId = 1,
-                Code = "APP01",
-                Name = "App-01",
-                PublicKey = Guid.NewGuid().ToString()
-            };
+            var appLoginUsers = _accountRepo.FindUsers();
 
-
-            
-            ViewBag.AppList = _appRepo.FindAllApps();
-            ViewBag.AppList = new List<App>();
-            ViewBag.AppList.Add(a);
-            return View();
+            return View(appLoginUsers);
         }
 
         [HttpPost]

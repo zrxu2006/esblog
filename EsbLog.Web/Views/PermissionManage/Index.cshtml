@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<EsbLog.Domain.Platform.LoginUser>
+@{
     ViewBag.Title = "权限管理";
 }
 @section css{
@@ -35,6 +36,7 @@
         });
     </script>
 }
+
 @*@section ContentHeader{
         权限管理
     }*@
@@ -51,13 +53,13 @@
                 @using (Html.BeginForm("Index", "PermissionManage", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
                     <div class="control-group">
-                        <label class="control-label">权限名称</label>
+                        <label class="control-label">用户名称</label>
                         <div class="controls">
                             @*@Html.TextBoxFor()*@
-                            <input type="text" name="PermissionName" placeholder="Hover for tooltip…" data-title="A tooltip for the input" class="span10 tip" data-original-title="">
+                            <input type="text" name="UserName" placeholder="请输入权限名称" class="span11">
                         </div>
                     </div>
-                    <div class="control-group">
+                    @*<div class="control-group">
                         <label class="control-label">应用</label>
                         <div class="controls">
                             <select id="selApps" multiple>
@@ -67,27 +69,18 @@
                                     {
                                         <option value="@app.AppId">@app.Name</option>
                                     }
-                                }                                
-                                
-                                @*<option selected>Second option</option>
-                                <option>Third option</option>
-                                <option>Fourth option</option>
-                                <option>Fifth option</option>
-                                <option>Sixth option</option>
-                                <option>Seventh option</option>
-                                <option>Eighth option</option>*@
+                                }
+
                             </select>
                         </div>
-                    </div>
+                    </div>*@
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">查询</button>
                     </div>
                 }
 
             </div>
         </div>
-
-
 
         <div class="widget-box">
             <div class="widget-title">
@@ -98,41 +91,26 @@
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
-                            <th>Rendering engine</th>
-                            <th>Browser</th>
-                            <th>Platform(s)</th>
-                            <th>Engine version</th>
+                            <th>用户名</th>
+                            <th>使用App数量</th>
+                            @*<th>Platform(s)</th>
+                            <th>Engine version</th>*@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="gradeX">
-                            <td>Trident</td>
-                            <td>
-                                Internet
-                                Explorer 4.0
-                            </td>
-                            <td>Win 95+</td>
-                            <td class="center">4</td>
-                        </tr>
-                        <tr class="gradeC">
-                            <td>Trident</td>
-                            <td>
-                                Internet
-                                Explorer 5.0
-                            </td>
-                            <td>Win 95+</td>
-                            <td class="center">5</td>
-                        </tr>
-                        <tr class="gradeA">
-                            <td>Trident</td>
-                            <td>
-                                Internet
-                                Explorer 5.5
-                            </td>
-                            <td>Win 95+</td>
-                            <td class="center">5.5</td>
-                        </tr>
-                        <tr class="gradeA">
+                        @foreach(var user in Model)
+                        {
+                            <tr class="gradeX">
+                                <td>@user.LoginName</td>
+                                <td>
+                                    @user.Apps.Count
+                                </td>
+                            
+                            </tr>
+                        }
+                        
+                      
+                        @*<tr class="gradeA">
                             <td>Trident</td>
                             <td>
                                 Internet
@@ -458,7 +436,7 @@
                             <td>All others</td>
                             <td>-</td>
                             <td class="center">-</td>
-                        </tr>
+                        </tr>*@
                     </tbody>
                 </table>
             </div>

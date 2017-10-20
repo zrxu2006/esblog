@@ -21,6 +21,14 @@ namespace EsbLog.Platform.Database.Mapping
                         .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(p => p.PermissionName).HasColumnName("PermissionName");
             Property(p => p.PermissionStatus).HasColumnName("PermissionStatus");
+
+            //HasMany(p => p.Apps).WithMany(a => a.Permissions)
+            //        .Map(m =>
+            //        {
+            //            m.ToTable("tblAppPermission");
+            //            m.MapLeftKey("PermissionId");
+            //            m.MapRightKey("AppId");
+            //        });
         }
     }
 }
