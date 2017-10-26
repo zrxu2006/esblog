@@ -26,10 +26,11 @@ namespace EsbLog.Platform.Database.Mapping
             Property(l => l.Description).HasColumnName("Description");
             Property(l => l.PublicKey).HasColumnName("PublicKey");
 
-            HasOptional(l => l.User).WithMany(u => u.Apps)
-                .Map(m =>
-                {
-                    m.MapKey("UserId");
+            HasMany(l => l.Users).WithMany(u => u.Apps)
+                .Map(m=>{
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("AppId");
+                    m.ToTable("tblUserApp");
                 });
         }
     }

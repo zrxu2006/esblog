@@ -93,7 +93,9 @@ namespace EsbLog.Web.Repository.Concrete
         {
             using (var db = _factory.GetPlatformDb())
             {
-                return db.Apps.ToList();
+                return db.Apps
+                    .Include(a=> a.Users)
+                    .ToList();
             }
         }
 
@@ -101,7 +103,9 @@ namespace EsbLog.Web.Repository.Concrete
         {
             using (var db = _factory.GetPlatformDb())
             {
-                return db.Apps.Where(a => filter(a)).ToList();
+                return db.Apps
+                    .Include(a=>a.Users)
+                    .Where(a => filter(a)).ToList();
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using EsbLog.Domain.Platform;
+﻿using AutoMapper;
+using EsbLog.Domain.Platform;
 using EsbLog.Web.Infrastructure;
 using EsbLog.Web.Models;
 using EsbLog.Web.Repository;
@@ -34,12 +35,34 @@ namespace EsbLog.Web.Controllers
         [HttpPost]
         public ActionResult Index(PermissionQueryRequest queryRequest)
         {
-            return View();
+            var apploginUsers = _accountRepo.FindUsers()
+                                .Where(u=> string.IsNullOrEmpty(queryRequest.UserName)
+                                        || u.LoginName.Contains(queryRequest.UserName));
+
+            return View(apploginUsers);
         }
 
         public ActionResult Add()
         {
-            return View();
+            var applist = _appRepo.FindAllApps()
+                            .Where(a => a.Users == null);
+            LoginUserAddModel model = new LoginUserAddModel
+            {
+                AppList = applist
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Add(LoginUserAddModel addModel)
+        {
+            //Mapper.Initialize(c => c.AddProfile<EsbLogAutoMapperProfile>());
+            var loginUser = Mapper.Map<LoginUser>(addModel);
+            _accountRepo.AddUser(loginUser);
+            return null;
+
+            //return View(model);
         }
 	}
 }

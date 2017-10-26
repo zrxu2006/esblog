@@ -22,8 +22,8 @@ namespace EsbLog.Domain.Platform
         public string Description { get; set; }
 
         public string PublicKey { get; set; }
-        //public int? UserId { get; set; }
-        public virtual LoginUser User { get; set; }
+        public int? UserId { get; set; }
+        public virtual ICollection<LoginUser> Users { get; set; }
 
     }
 }

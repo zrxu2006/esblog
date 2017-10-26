@@ -67,5 +67,21 @@ namespace EsbLog.Web.Repository.Concrete
         {
             return true;
         }
+
+        public bool AddUser(LoginUser user)
+        {
+            using (var context = _factory.GetPlatformDb())
+            {
+                var appIds = user.Apps.Select(a => a.AppId)
+                                .ToList();
+                var apps = context.Apps.Where(a => appIds.Contains(a.AppId))
+                            .ToList();
+                user.Apps = apps;
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+
+            return true;
+        }
     }
 }

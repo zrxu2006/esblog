@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\libs\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -197,10 +200,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\EsblogAuthAttribute.cs" />
+    <Compile Include="Infrastructure\EsbLogAutoMapperProfile.cs" />
     <Compile Include="Infrastructure\EsblogContentHeaderCollection.cs" />
     <Compile Include="Infrastructure\EsblogExceptionFilterAttribute.cs" />
     <Compile Include="Models\ContentHeaderDisplayViewModel.cs" />
     <Compile Include="Models\ContentHeaderViewModel.cs" />
+    <Compile Include="Models\LoginUserAddModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
     <Compile Include="Models\NavViewModel.cs" />
     <Compile Include="Models\PermissionQueryRequest.cs" />
@@ -221,6 +226,7 @@
     <Content Include="Views\Account\Test.cshtml" />
     <Content Include="Views\Nav\MatrixContentHeader.cshtml" />
     <Content Include="Views\Nav\MatrixMenu.cshtml" />
+    <Content Include="Views\PermissionManage\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

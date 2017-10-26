@@ -1,0 +1,107 @@
+﻿@model EsbLog.Web.Models.LoginUserAddModel
+
+@{
+    ViewBag.Title = "新增用户";
+}
+
+@section css{
+    <link rel="stylesheet" href="~/Content/Matrix/css/uniform.css" />
+    <link rel="stylesheet" href="~/Content/Matrix/css/select2.css" />
+}
+@section scripts{
+    <script src="~/Content/Matrix/js/jquery.uniform.js"></script>
+    <script src="~/Content/Matrix/js/select2.min.js"></script>
+    <script src="~/Content/Matrix/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Matrix/js/matrix.tables.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document.body).on("change", '#selApps',
+            function (ev) {
+                var choice;
+                var values = ev.val;
+                // This is assuming the value will be an array of strings.
+                // Convert to a comma-delimited string to set the value.
+                if (values !== null && values.length > 0) {
+                    for (var i = 0; i < values.length; i++) {
+                        if (typeof choice !== 'undefined') {
+                            choice += ",";
+                            choice += values[i];
+                        }
+                        else {
+                            choice = values[i];
+                        }
+                    }
+                }
+
+                $('#AppIds').val(choice);
+                //alert(choice);
+            });
+    });
+</script>
+
+}
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>新增用户</h5>
+            </div>
+            <div class="widget-content nopadding">
+                @using (Html.BeginForm("Add", "PermissionManage", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="control-group">
+                        <label class="control-label">用户名称</label>
+                        <div class="controls">
+                            <input type="email" name="LoginName" value="" class="span11" placeholder="请输入E-Mail地址">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">应用</label>
+                        <div class="controls">
+                            <select id="selApps" multiple>
+                                @if (Model.AppList != null)
+                                {
+                                    foreach (var app in Model.AppList)
+                                    {
+                                        <option value="@app.AppId">@app.Name</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(m => m.AppIds);
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">保存</button>
+
+                        @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-primary" })
+                    </div>
+                }
+
+                @if (TempData.ContainsKey("success"))
+                {
+                    if ((bool)TempData["success"])
+                    {
+                        <div class="alert alert-success">
+                            <button class="close" data-dismiss="alert">×</button>
+                            <strong>保存成功!</strong>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-error">
+                            <button class="close" data-dismiss="alert">×</button>
+                            <strong>保存失败!</strong>
+                        </div>
+                    }
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>

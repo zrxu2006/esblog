@@ -33,6 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=0.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -46,6 +53,9 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.7.142\lib\net45\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -103,7 +113,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseTest.cs" />
     <Compile Include="Controllers\LogControllerTest.cs" />
+    <Compile Include="Controllers\PermissionControllerTest.cs" />
     <Compile Include="Database\UnitTestDbFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\ValuesControllerTest.cs" />
@@ -128,6 +140,10 @@
       <Project>{70199047-1c62-4325-98ff-53363022b21d}</Project>
       <Name>EsbLog.Platform.Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Services\EsbLog.Web.Repository\EsbLog.Web.Repository.csproj">
+      <Project>{8eab192c-0c4d-4e83-a7ef-637b53cbdcfb}</Project>
+      <Name>EsbLog.Web.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EsbLog.Tools\EsbLog.Tools.csproj">
       <Project>{aaabc9fc-da05-421f-993f-e01bb1739e24}</Project>
       <Name>EsbLog.Tools</Name>
@@ -135,6 +151,10 @@
     <ProjectReference Include="..\EsbLog.WebApi\EsbLog.WebApi.csproj">
       <Project>{0BC5D12B-7119-4CC7-A2A6-34E15EEBDE0C}</Project>
       <Name>EsbLog.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Web\EsbLog.Web.csproj">
+      <Project>{eec7276d-c9dd-47cc-843e-54bf42f3f979}</Project>
+      <Name>EsbLog.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

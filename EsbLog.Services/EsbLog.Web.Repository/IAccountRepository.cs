@@ -12,6 +12,7 @@ namespace EsbLog.Web.Repository
 {
     public interface IAccountRepository
     {
+        bool AddUser(LoginUser user);
         int ValidateUser(string username, string password);
 
         void UpdateLoginTime(int userId);

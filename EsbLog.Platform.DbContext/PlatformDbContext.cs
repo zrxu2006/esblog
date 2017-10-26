@@ -25,7 +25,7 @@ namespace EsbLog.Platform.Database
         {
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
-            System.Data.Entity.Database.SetInitializer<PlatformDBContext>(null);
+            System.Data.Entity.Database.SetInitializer(new CreateDatabaseIfNotExists<PlatformDBContext>());
 
             #if DEBUG
             Database.Log = sql => { Debug.WriteLine(sql); };
