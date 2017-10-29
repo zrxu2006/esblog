@@ -1,7 +1,7 @@
-﻿@model EsbLog.Web.Models.LoginUserAddModel
+﻿@model EsbLog.Web.Models.LoginUserEditModel
 
 @{
-    ViewBag.Title = "新增用户";
+    ViewBag.Title = Model.Id.HasValue ? "编辑" : "新增" + "用户";
 }
 
 @section css{
@@ -37,6 +37,8 @@
                 //alert(choice);
             });
     });
+
+    //$('#selApps').val(@Model.AppIds);
 </script>
 
 }
@@ -46,17 +48,17 @@
         <div class="widget-box">
             <div class="widget-title">
                 <span class="icon"> <i class="icon-align-justify"></i> </span>
-                <h5>新增用户</h5>
+                <h5>@ViewBag.Title</h5>
             </div>
             <div class="widget-content nopadding">
-                @using (Html.BeginForm("Add", "PermissionManage", FormMethod.Post, new { @class = "form-horizontal" }))
+                @using (Html.BeginForm(Model.Id.HasValue?"Edit": "Add", "PermissionManage", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="control-group">
                         <label class="control-label">用户名称</label>
                         <div class="controls">
-                            <input type="email" name="LoginName" value="" class="span11" placeholder="请输入E-Mail地址">
+                            <input type="email" name="LoginName" value="@Model.LoginName" class="span11" placeholder="请输入E-Mail地址">
                         </div>
                     </div>
                     <div class="control-group">
@@ -65,9 +67,11 @@
                             <select id="selApps" multiple>
                                 @if (Model.AppList != null)
                                 {
+                                    var appIdList = Model.AppIds.Split(',');
                                     foreach (var app in Model.AppList)
                                     {
-                                        <option value="@app.AppId">@app.Name</option>
+                                        var selected = @appIdList.Contains(app.AppId.ToString()) ? "selected" : "";
+                                        <option @selected value="@app.AppId">@app.Name</option>
                                     }
                                 }
 

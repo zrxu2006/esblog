@@ -18,8 +18,9 @@ namespace EsbLog.Web.Repository
         void UpdateLoginTime(int userId);
 
         IEnumerable<LoginUser> FindUsers();
+        LoginUser FindUserById(int userId);
 
-        bool BindUserApp(int userId,IEnumerable<int> appIdList);
+        bool EditUser(LoginUser user);
     }
        
 }

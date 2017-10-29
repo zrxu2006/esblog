@@ -37,12 +37,17 @@ namespace EsbLog.Web.Infrastructure
 
         protected override void Configure()
         {
-            CreateMap<LoginUserAddModel, LoginUser>()
+            CreateMap<LoginUserEditModel, LoginUser>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.UserType, opt => opt.UseValue<string>("U"))
                 .ForMember(dest => dest.LoginTime, opt => opt.UseValue<DateTime?>(null))
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
-                .ForMember(dest => dest.Apps, opt => opt.MapFrom(src=> GetApps(src.AppIds)));
+                .ForMember(dest => dest.Apps, opt => opt.MapFrom(src => GetApps(src.AppIds)))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id ?? 0));
+
+            CreateMap<LoginUser, LoginUserEditModel>()
+                .ForMember(dest => dest.AppIds, opt => opt.MapFrom(src=>GetAppIds(src.Apps)))
+                .ForMember(dest => dest.AppList, opt => opt.Ignore());                
         }
 
         private ICollection<App> GetApps(string concatIds)
@@ -64,6 +69,12 @@ namespace EsbLog.Web.Infrastructure
 
             }
             return result;
+        }
+
+        private string GetAppIds(IEnumerable<App> apps)
+        {
+            return string.Join(",",
+                    apps.Select(a=> a.AppId.ToString()));
         }
     }
 }

@@ -6,9 +6,10 @@ using System.Web;
 
 namespace EsbLog.Web.Models
 {
-    public class LoginUserAddModel
+    public class LoginUserEditModel
     {
-        public LoginUserAddModel()
+        public int? Id { get; set; }
+        public LoginUserEditModel()
         {
             AppList = new List<App>();
         }

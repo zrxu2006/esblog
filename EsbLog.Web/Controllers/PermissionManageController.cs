@@ -44,9 +44,9 @@ namespace EsbLog.Web.Controllers
 
         public ActionResult Add()
         {
-            var applist = _appRepo.FindAllApps()
-                            .Where(a => a.Users == null);
-            LoginUserAddModel model = new LoginUserAddModel
+            var applist = _appRepo.FindAllApps();
+                            //.Where(a => a.Users == null);
+            LoginUserEditModel model = new LoginUserEditModel
             {
                 AppList = applist
             };
@@ -55,14 +55,36 @@ namespace EsbLog.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(LoginUserAddModel addModel)
-        {
-            //Mapper.Initialize(c => c.AddProfile<EsbLogAutoMapperProfile>());
+        public ActionResult Add(LoginUserEditModel addModel)
+        {            
             var loginUser = Mapper.Map<LoginUser>(addModel);
-            _accountRepo.AddUser(loginUser);
-            return null;
+            bool success = _accountRepo.AddUser(loginUser);
+            addModel.Id= loginUser.Id;
+            TempData["success"] = success;
+            return View("Add",addModel);
+        }
 
-            //return View(model);
+        public ActionResult Edit(int id)
+        {
+            var user = _accountRepo.FindUserById(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            var loginUser = Mapper.Map<LoginUserEditModel>(user);
+            loginUser.AppList = _appRepo.FindAllApps(); 
+            return View("Add",loginUser);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(LoginUserEditModel user)
+        {
+            var loginUser = Mapper.Map<LoginUser>(user);
+            bool success = _accountRepo.EditUser(loginUser);
+           
+            TempData["success"] = success;
+            return View("Add", user);
         }
 	}
 }

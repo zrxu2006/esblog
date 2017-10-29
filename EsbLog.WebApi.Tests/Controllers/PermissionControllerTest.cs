@@ -31,7 +31,7 @@ namespace EsbLog.WebApi.Tests.Controllers
             var account = new AccountRepository(DBFactory);
             var controller = new PermissionManageController(app,account);
 
-            controller.Add(new LoginUserAddModel
+            controller.Add(new LoginUserEditModel
             {
                 LoginName= "Test2@Test.com",
                 AppIds = "1,2,3"

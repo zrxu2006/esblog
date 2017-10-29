@@ -92,7 +92,7 @@
                 <table class="table table-bordered data-table">
                     <thead>
                         <tr>
-                            <th><strong>用户名</strong></th>
+                            <th>用户名</th>
                             <th>关联App</th>
                             <th>操作</th>
                             @*<th>Engine version</th>*@
@@ -102,12 +102,15 @@
                         @foreach (var user in Model)
                         {
                             <tr class="gradeX ">
-                                <td ><div class="text-center">@user.LoginName</div></td>
+                                <td >@user.LoginName</td>
                                 <td>
-                                    <div class="text-center">@user.Apps.Count</div>
+                                    @foreach (var app in user.Apps)
+                                    {
+                                        <span>@app.Name</span>
+                                    }
                                 </td>
                                 <td>
-                                    <div class="text-center">a</div>
+                                    @Html.ActionLink("Edit", "Edit", new { id = user.Id }, new { @class = "btn btn-success" })
                                 </td>
                             </tr>
                         }

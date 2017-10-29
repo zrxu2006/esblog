@@ -63,11 +63,6 @@ namespace EsbLog.Web.Repository.Concrete
             }
         }
 
-        public bool BindUserApp(int userId, IEnumerable<int> appIdList)
-        {
-            return true;
-        }
-
         public bool AddUser(LoginUser user)
         {
             using (var context = _factory.GetPlatformDb())
@@ -78,6 +73,44 @@ namespace EsbLog.Web.Repository.Concrete
                             .ToList();
                 user.Apps = apps;
                 context.Users.Add(user);
+                context.SaveChanges();             
+            }
+
+            return true;
+        }
+
+
+        public LoginUser FindUserById(int userId)
+        {
+            using (var context = _factory.GetPlatformDb())
+            {
+                var user = context.Users
+                            .Include(u => u.Apps)
+                            .Where(u => u.UserType == "U"
+                                && u.Id == userId)
+                            .FirstOrDefault();
+                return user;
+            }
+        }
+
+
+        public bool EditUser(LoginUser user)
+        {
+            using (var context = _factory.GetPlatformDb())
+            {
+                var appIds = user.Apps.Select(a => a.AppId)
+                                .ToList();
+                var apps = context.Apps.Where(a => appIds.Contains(a.AppId))
+                            .ToList();
+
+                var updatingUser = context.Users.FirstOrDefault(u => u.Id == user.Id);
+                if (updatingUser == null)
+                {
+                    return false;
+                }
+
+                updatingUser.LoginName = user.LoginName;
+                updatingUser.Apps = apps;
                 context.SaveChanges();
             }
 
