@@ -106,11 +106,12 @@
                                 <td>
                                     @foreach (var app in user.Apps)
                                     {
-                                        <span>@app.Name</span>
+                                        <span class="badge bar-info">@app.Name</span>
                                     }
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = user.Id }, new { @class = "btn btn-success" })
+                                    @Html.ActionLink("编辑", "Edit", new { id = user.Id }, new { @class = "btn btn-success" })
+                                    
                                 </td>
                             </tr>
                         }

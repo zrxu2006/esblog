@@ -1,0 +1,54 @@
+﻿@model EsbLog.Domain.Platform.LoginUser
+
+@{
+    ViewBag.Title = "重置密码";
+}
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>@ViewBag.Title</h5>
+            </div>
+            <div class="widget-content nopadding">
+                @using (Html.BeginForm("SendPsw", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="control-group">
+                        <label class="control-label">重置密码发送至：</label>
+                        <div class="controls">
+                            <input type="email" name="LoginName" readonly value="@Model.LoginName" class="span11" placeholder="请输入E-Mail地址">
+                        </div>
+                    </div>
+                    
+                    @Html.HiddenFor(m => m.Id);
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">发送</button>                        
+                        @Html.ActionLink("返回", "Edit","PermissionManage",new{id=Model.Id}, new { @class = "btn btn-primary" })
+                    </div>
+                }
+
+                @if (TempData.ContainsKey("success"))
+                {
+                    if ((bool)TempData["success"])
+                    {
+                        <div class="alert alert-success">
+                            <button class="close" data-dismiss="alert">×</button>
+                            <strong>密码已重置成功!</strong>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-error">
+                            <button class="close" data-dismiss="alert">×</button>
+                            <strong>密码已重置成功失败!</strong>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

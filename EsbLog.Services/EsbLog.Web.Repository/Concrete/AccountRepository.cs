@@ -86,8 +86,7 @@ namespace EsbLog.Web.Repository.Concrete
             {
                 var user = context.Users
                             .Include(u => u.Apps)
-                            .Where(u => u.UserType == "U"
-                                && u.Id == userId)
+                            .Where(u=> u.Id == userId)
                             .FirstOrDefault();
                 return user;
             }

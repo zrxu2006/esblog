@@ -19,8 +19,9 @@ namespace EsbLog.Web.Controllers
         }
         //
         // GET: /Home/
-        public ActionResult Index(LoginUserViewModel user)
+        public ActionResult Index(int id)
         {
+            var user = _repo.FindUserById(id);
             return View(user);
         }
 

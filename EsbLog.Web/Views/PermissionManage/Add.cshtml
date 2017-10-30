@@ -53,12 +53,14 @@
             <div class="widget-content nopadding">
                 @using (Html.BeginForm(Model.Id.HasValue?"Edit": "Add", "PermissionManage", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
+                    bool isAdd = !Model.Id.HasValue;
+                    string readOnly = isAdd?"":"readonly";
                     @Html.AntiForgeryToken()
 
                     <div class="control-group">
                         <label class="control-label">用户名称</label>
-                        <div class="controls">
-                            <input type="email" name="LoginName" value="@Model.LoginName" class="span11" placeholder="请输入E-Mail地址">
+                        <div class="controls">                            
+                            <input type="email" name="LoginName" @readOnly value="@Model.LoginName" class="span11" placeholder="请输入E-Mail地址">
                         </div>
                     </div>
                     <div class="control-group">
@@ -67,7 +69,7 @@
                             <select id="selApps" multiple>
                                 @if (Model.AppList != null)
                                 {
-                                    var appIdList = Model.AppIds.Split(',');
+                                    var appIdList = (Model.AppIds??string.Empty).Split(',');
                                     foreach (var app in Model.AppList)
                                     {
                                         var selected = @appIdList.Contains(app.AppId.ToString()) ? "selected" : "";
@@ -81,7 +83,11 @@
                     @Html.HiddenFor(m => m.AppIds);
                     <div class="form-actions">
                         <button type="submit" class="btn btn-success">保存</button>
-
+                        @if (Model.Id.HasValue)
+                        {
+                            @Html.ActionLink("重置密码", "SendPsw","Account",new{id=Model.Id}, new { @class = "btn btn-warning" })    
+                        }
+                        
                         @Html.ActionLink("返回", "Index", null, new { @class = "btn btn-primary" })
                     </div>
                 }
@@ -103,7 +109,6 @@
                         </div>
                     }
                 }
-
 
             </div>
         </div>

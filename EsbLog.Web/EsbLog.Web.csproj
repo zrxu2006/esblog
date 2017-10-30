@@ -227,6 +227,7 @@
     <Content Include="Views\Nav\MatrixContentHeader.cshtml" />
     <Content Include="Views\Nav\MatrixMenu.cshtml" />
     <Content Include="Views\PermissionManage\Add.cshtml" />
+    <Content Include="Views\Account\SendPsw.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

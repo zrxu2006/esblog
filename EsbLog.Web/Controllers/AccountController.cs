@@ -1,4 +1,5 @@
-﻿using EsbLog.Web.Infrastructure;
+﻿using EsbLog.Domain.Platform;
+using EsbLog.Web.Infrastructure;
 using EsbLog.Web.Models;
 using EsbLog.Web.Repository;
 using System;
@@ -43,7 +44,7 @@ namespace EsbLog.Web.Controllers
                 _repo.UpdateLoginTime(userId);
                 FormsAuthentication.SetAuthCookie(user.UserName, false);
                 return Redirect(string.IsNullOrEmpty(returnUrl)
-                                    ? Url.Action("Index", "Account")
+                                    ? Url.Action("Index", "Home",new{id= userId})
                                     : returnUrl);
             }
             else
@@ -74,5 +75,26 @@ namespace EsbLog.Web.Controllers
         {
             return View();
         }
-	}
+
+        [HttpGet]       
+        public ActionResult SendPsw(int id)
+        {
+            var user = _repo.FindUserById(id);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SendPsw(LoginUser user)
+        {
+            var resendUser = _repo.FindUserById(user.Id);
+
+            // TODO
+            // Send psw to email
+
+            TempData["success"] = true;
+            return RedirectToAction("SendPsw", new { id = user.Id });
+        }
+    }
 }

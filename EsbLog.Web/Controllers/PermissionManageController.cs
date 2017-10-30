@@ -36,7 +36,7 @@ namespace EsbLog.Web.Controllers
         public ActionResult Index(PermissionQueryRequest queryRequest)
         {
             var apploginUsers = _accountRepo.FindUsers()
-                                .Where(u=> string.IsNullOrEmpty(queryRequest.UserName)
+                                .Where(u => string.IsNullOrEmpty(queryRequest.UserName)
                                         || u.LoginName.Contains(queryRequest.UserName));
 
             return View(apploginUsers);
@@ -45,7 +45,7 @@ namespace EsbLog.Web.Controllers
         public ActionResult Add()
         {
             var applist = _appRepo.FindAllApps();
-                            //.Where(a => a.Users == null);
+            //.Where(a => a.Users == null);
             LoginUserEditModel model = new LoginUserEditModel
             {
                 AppList = applist
@@ -56,12 +56,12 @@ namespace EsbLog.Web.Controllers
 
         [HttpPost]
         public ActionResult Add(LoginUserEditModel addModel)
-        {            
+        {
             var loginUser = Mapper.Map<LoginUser>(addModel);
             bool success = _accountRepo.AddUser(loginUser);
-            addModel.Id= loginUser.Id;
+            addModel.Id = loginUser.Id;
             TempData["success"] = success;
-            return View("Add",addModel);
+            return RedirectToAction("Edit", new { id = addModel.Id });
         }
 
         public ActionResult Edit(int id)
@@ -73,8 +73,8 @@ namespace EsbLog.Web.Controllers
             }
 
             var loginUser = Mapper.Map<LoginUserEditModel>(user);
-            loginUser.AppList = _appRepo.FindAllApps(); 
-            return View("Add",loginUser);
+            loginUser.AppList = _appRepo.FindAllApps();
+            return View("Add", loginUser);
         }
 
         [HttpPost]
@@ -82,9 +82,9 @@ namespace EsbLog.Web.Controllers
         {
             var loginUser = Mapper.Map<LoginUser>(user);
             bool success = _accountRepo.EditUser(loginUser);
-           
+
             TempData["success"] = success;
-            return View("Add", user);
+            return RedirectToAction("Edit", new { id = user.Id });
         }
-	}
+    }
 }
