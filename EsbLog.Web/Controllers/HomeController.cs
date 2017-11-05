@@ -3,6 +3,7 @@ using EsbLog.Web.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -13,16 +14,33 @@ namespace EsbLog.Web.Controllers
     public class HomeController : Controller
     {
         IAccountRepository _repo;
-        public HomeController(IAccountRepository repo)
+        IAppManagerRepository _appRepo;
+        public HomeController(IAccountRepository repo, IAppManagerRepository appRepo)
         {
             _repo = repo;
+            _appRepo = appRepo;
         }
         //
         // GET: /Home/
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
-            var user = _repo.FindUserById(id);
-            return View(user);
+            int? id = Session["id"] as int?;
+            if (!id.HasValue)
+            {
+                return RedirectToAction("Login", "Account", new { returnUrl = Request.RawUrl });                
+            }
+            else
+            {
+                var user = _repo.FindUserById(id.Value);
+                HomeModel m = new HomeModel();
+                m.IsManager = user.UserType.ToLower() == "m";
+                if (m.IsManager)
+                {
+                    m.AppCount = _appRepo.GetCount();
+                    m.PermissionCount = _repo.GetCount();
+                }
+                return View(m);
+            }            
         }
 
         [AllowAnonymous]

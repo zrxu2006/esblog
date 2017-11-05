@@ -42,6 +42,7 @@ namespace EsbLog.Web.Controllers
             {
                 //Session["User"] = user;
                 _repo.UpdateLoginTime(userId);
+                Session["id"] = userId;
                 FormsAuthentication.SetAuthCookie(user.UserName, false);
                 return Redirect(string.IsNullOrEmpty(returnUrl)
                                     ? Url.Action("Index", "Home",new{id= userId})

@@ -21,6 +21,7 @@ namespace EsbLog.Web.Repository
         LoginUser FindUserById(int userId);
 
         bool EditUser(LoginUser user);
+        int GetCount();
     }
        
 }

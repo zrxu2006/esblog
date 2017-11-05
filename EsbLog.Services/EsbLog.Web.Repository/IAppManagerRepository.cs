@@ -18,5 +18,6 @@ namespace EsbLog.Web.Repository
         bool IsExist(string appcode);
 
         bool EditApp(App app);
+        int GetCount();
     }
 }

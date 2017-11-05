@@ -89,6 +89,7 @@ namespace EsbLog.Web.Repository.Concrete
                             .Where(u=> u.Id == userId)
                             .FirstOrDefault();
                 return user;
+
             }
         }
 
@@ -114,6 +115,17 @@ namespace EsbLog.Web.Repository.Concrete
             }
 
             return true;
+        }
+
+
+        public int GetCount()
+        {
+            using (var context = _factory.GetPlatformDb())
+            {
+                return context.Users.AsNoTracking()
+                    .Where(u=> u.UserType=="U")
+                    .Count();
+            }
         }
     }
 }

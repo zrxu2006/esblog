@@ -132,5 +132,14 @@ namespace EsbLog.Web.Repository.Concrete
 
             return true;
         }
+
+
+        public int GetCount()
+        {
+            using (var db = _factory.GetPlatformDb())
+            {
+                return db.Apps.AsNoTracking().Count();
+            }
+        }
     }
 }
