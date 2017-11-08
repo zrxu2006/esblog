@@ -1,0 +1,77 @@
+﻿@model EsbLog.Web.Models.EditPswModel
+
+@{
+    ViewBag.Title = "修改密码";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/Matrix/css/uniform.css" />
+    <link rel="stylesheet" href="~/Content/Matrix/css/select2.css" />
+}
+@section scripts{
+    <script src="~/Content/Matrix/js/jquery.uniform.js"></script>
+    <script src="~/Content/Matrix/js/select2.min.js"></script>
+    <script src="~/Content/Matrix/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Matrix/js/matrix.tables.js"></script>
+}
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>@ViewBag.Title</h5>
+            </div>
+            <div class="widget-content nopadding">
+                @using (Html.BeginForm("EditPsw", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="control-group">
+                        <label class="control-label">原密码：</label>
+                        <div class="controls">
+                            <input type="password" name="OldPassword" class="span11" placeholder="请输入原密码">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">新密码：</label>
+                        <div class="controls">
+                            <input type="password" name="NewPassword" class="span11" placeholder="请输入新密码">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">新密码确认：</label>
+                        <div class="controls">
+                            <input type="password" name="NewPasswordConfirm" class="span11" placeholder="请输入确认新密码">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">保存</button>
+
+                        @Html.ActionLink("返回", "Index","Home",null, new { @class = "btn btn-primary" })
+                    </div>
+                }
+
+                @if (TempData.ContainsKey("success"))
+                {
+                    string message = (string)TempData["message"];
+                    if ((bool)TempData["success"])
+                    {
+                        <div class="alert alert-success">
+                            <button class="close" data-dismiss="alert">×</button>
+                            <strong>密码修改成功!</strong>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-error">
+                            <button class="close" data-dismiss="alert">×</button>
+                            <strong>@message</strong>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

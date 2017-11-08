@@ -202,9 +202,11 @@
     <Compile Include="Infrastructure\EsblogAuthAttribute.cs" />
     <Compile Include="Infrastructure\EsbLogAutoMapperProfile.cs" />
     <Compile Include="Infrastructure\EsblogContentHeaderCollection.cs" />
+    <Compile Include="Infrastructure\EsblogControllerExtension.cs" />
     <Compile Include="Infrastructure\EsblogExceptionFilterAttribute.cs" />
     <Compile Include="Models\ContentHeaderDisplayViewModel.cs" />
     <Compile Include="Models\ContentHeaderViewModel.cs" />
+    <Compile Include="Models\EditPswModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\LoginUserAddModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
@@ -229,6 +231,7 @@
     <Content Include="Views\Nav\MatrixMenu.cshtml" />
     <Content Include="Views\PermissionManage\Add.cshtml" />
     <Content Include="Views\Account\SendPsw.cshtml" />
+    <Content Include="Views\Account\EditPsw.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

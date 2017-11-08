@@ -19,10 +19,8 @@ namespace EsbLog.Web.Repository.Concrete
         }
 
         public int ValidateUser(string username, string password)
-        {
-            MD5 md5 = MD5.Create();
-            var bytes = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
-            var md5String = Convert.ToBase64String(bytes);
+        {            
+            var md5String = GetMd5String(password);
             int userId;
             using (var context = _factory.GetPlatformDb())
             {
@@ -36,6 +34,12 @@ namespace EsbLog.Web.Repository.Concrete
             return userId;
         }
 
+        private string GetMd5String(string str)
+        {
+            MD5 md5 = MD5.Create();
+            var bytes = md5.ComputeHash(Encoding.UTF8.GetBytes(str));
+            return Convert.ToBase64String(bytes);
+        }
 
         public void UpdateLoginTime(int userId)
         {
@@ -125,6 +129,22 @@ namespace EsbLog.Web.Repository.Concrete
                 return context.Users.AsNoTracking()
                     .Where(u=> u.UserType=="U")
                     .Count();
+            }
+        }
+        
+        public void UpdatePsw(int userId, string newPsw)
+        {
+            using (var db = _factory.GetPlatformDb())
+            {
+                var user = db.Users                           
+                            .Where(u => u.Id == userId)
+                            .FirstOrDefault();
+
+                if(user!=null)
+                {
+                    user.Password = GetMd5String(newPsw);
+                    db.SaveChanges();
+                }
             }
         }
     }

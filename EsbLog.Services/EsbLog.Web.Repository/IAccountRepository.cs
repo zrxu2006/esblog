@@ -21,6 +21,8 @@ namespace EsbLog.Web.Repository
         LoginUser FindUserById(int userId);
 
         bool EditUser(LoginUser user);
+
+        void UpdatePsw(int userId, string newPsw);
         int GetCount();
     }
        

@@ -37,12 +37,17 @@ namespace EsbLog.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginUserViewModel user, string returnUrl)
         {
+            if (string.IsNullOrEmpty(user.UserName))
+            {
+                ModelState.AddModelError("", "用户名或者密码错误");
+                return View();
+            }
             int userId = _repo.ValidateUser(user.UserName, user.Password);
             if (userId > 0)
             {
                 //Session["User"] = user;
                 _repo.UpdateLoginTime(userId);
-                Session["id"] = userId;
+                this.SetUserId(userId);
                 FormsAuthentication.SetAuthCookie(user.UserName, false);
                 return Redirect(string.IsNullOrEmpty(returnUrl)
                                     ? Url.Action("Index", "Home",new{id= userId})
@@ -68,6 +73,7 @@ namespace EsbLog.Web.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            this.ClearUserId();
             return RedirectToAction("Login");
         }
 
@@ -96,6 +102,62 @@ namespace EsbLog.Web.Controllers
 
             TempData["success"] = true;
             return RedirectToAction("SendPsw", new { id = user.Id });
+        }
+
+        [HttpGet]
+        public ActionResult EditPsw()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPsw(EditPswModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                TempData["success"] = false;
+                TempData["Message"] = "请输入原密码和新密码";
+                return View(new EditPswModel());
+            }
+            bool isSucceed = true;
+            string message = string.Empty;
+            int? userId = this.GetUserId();
+            if (!userId.HasValue)
+            {
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                var user = _repo.FindUserById(userId.Value);
+                if (user == null)
+                {
+                    return RedirectToAction("Logout");
+                }
+                else
+                {
+                    isSucceed = model.NewPassword == model.NewPasswordConfirm;
+                    if (!isSucceed)
+                    {
+                        message = "请确认新密码！";
+                    }
+                    else
+                    {
+                        if (_repo.ValidateUser(user.LoginName, model.OldPassword) == userId.Value)
+                        {
+                            _repo.UpdatePsw(userId.Value, model.NewPassword);
+                        }else
+                        {
+                            isSucceed = false;
+                            message = "原密码不正确！";
+                        }
+                    }                    
+                }
+            }
+
+            TempData["success"] = isSucceed;
+            TempData["Message"] = message;
+            return View();
         }
     }
 }
