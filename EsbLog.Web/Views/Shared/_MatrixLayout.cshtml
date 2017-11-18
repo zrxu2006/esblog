@@ -69,7 +69,7 @@
     <!--close-top-serch-->
 
     <!--sidebar-menu-->
-    @Html.Action("MatrixMenu", "Nav", new { selectedNav = this.ViewContext.RouteData.Values["controller"].ToString() })
+    @Html.Action("MatrixMenu", "Nav", new { context = this.ViewContext })
     <!--close-left-menu-stats-sidebar-->
 
     <div id="content">

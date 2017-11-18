@@ -51,7 +51,7 @@ namespace EsbLog.Web.Infrastructure
 
             CreateMap<LoginUser, UserSessionModel>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
-                .ForMember(dest => dest.IsManager, opt => opt.MapFrom(src => src.UserType == "U"))
+                .ForMember(dest => dest.IsManager, opt => opt.MapFrom(src => src.UserType.ToLower() == "m"))
                 .ForMember(dest => dest.UserApps, opt => opt.MapFrom(src => src.Apps));
         }
 

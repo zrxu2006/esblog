@@ -3,18 +3,20 @@
 @{
     Dictionary<string, string> _iconDict = new Dictionary<string, string>();
 
+    _iconDict.Add("Home".ToUpper(), "icon icon-home");
     _iconDict.Add("AppManage".ToUpper(), "icon icon-key");
     _iconDict.Add("PermissionManage".ToUpper(), "icon icon-lock");
-    _iconDict.Add("Extension".ToUpper(), "icon icon-cogs");
+    //_iconDict.Add("Extension".ToUpper(), "icon icon-cogs");
 }
 <div id="sidebar">
 
     <ul>
-        <li><a href="@Url.Action("Index","Home")"><i class="icon icon-home"></i> <span>首页</span></a> </li>
+        @*<li><a href="@Url.Action("Index","Home")"><i class="icon icon-home"></i> <span>首页</span></a> </li>*@
 
         @foreach (var c in Model)
-        {            
-            <li class='@c.IsActive? "active":""'>
+        {
+            var cls = c.IsActive ? "active" : "";
+            <li class='@cls'>
                 <a href=@Url.Action(c.ActionName,c.ControllerName)><i class='@_iconDict[c.ControllerName.ToUpper()]'></i>@c.NavName</a>
             </li>
         }

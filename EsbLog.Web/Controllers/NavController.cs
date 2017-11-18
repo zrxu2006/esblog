@@ -12,58 +12,90 @@ namespace EsbLog.Web.Controllers
     [EsblogAuth]
     public class NavController : Controller
     {
-        private readonly static List<NavViewModel> _navMenu
+        private readonly static List<NavViewModel> _navManageMenu
                                 = new List<NavViewModel>();
-        private static IEnumerable<NavViewModel> GetNavMenu()
+        private readonly static List<NavViewModel> _navAppMenu
+                                = new List<NavViewModel>();
+        private static IEnumerable<NavViewModel> GetNavMenu(bool isManager)
         {
-            if (_navMenu.Count == 0)
+            if (_navManageMenu.Count == 0)
             {
-                _navMenu.Add(new NavViewModel
+                _navManageMenu.Add(new NavViewModel
+                {
+                    NavName = "首页",
+                    ControllerName = "Home",
+                    ActionName = "Index"
+                });
+                _navManageMenu.Add(new NavViewModel
                 {
                     NavName = "应用管理",
                     ControllerName = "AppManage",
                     ActionName = "Index"
                 });
 
-                _navMenu.Add(new NavViewModel
+                _navManageMenu.Add(new NavViewModel
                 {
                     NavName = "权限管理",
                     ControllerName = "PermissionManage",
                     ActionName = "Index"
+                });                
+            }
+
+            if (_navAppMenu.Count == 0)
+            {
+                _navAppMenu.Add(new NavViewModel
+                {
+                    NavName = "日志查询",
+                    ControllerName = "Log",
+                    ActionName = "Index"
                 });
 
-                _navMenu.Add(new NavViewModel
+                _navAppMenu.Add(new NavViewModel
                 {
                     NavName = "扩展管理",
                     ControllerName = "Extension",
                     ActionName = "Index"
+                });
 
+                _navAppMenu.Add(new NavViewModel
+                {
+                    NavName = "日志查询",
+                    ControllerName = "LogReport",
+                    ActionName = "Index"
                 });
             }
-          
-            return _navMenu;
+            if (isManager)
+            {
+                return _navManageMenu;
+            }
+            else
+            {
+                return _navAppMenu;
+            }
         }
         //
         // GET: /Nav/
-        public ActionResult Menu(string selectedNav = null)
-        {
-            ViewBag.SelectedNav = selectedNav;
-            ViewBag.UserName = this.User.Identity.Name;
+        //public ActionResult Menu(string selectedNav = null)
+        //{
+        //    ViewBag.SelectedNav = selectedNav;
+        //    ViewBag.UserName = this.User.Identity.Name;
            
-            return PartialView(GetNavMenu());
-        }
+        //    return PartialView(GetNavMenu());
+        //}
         [AllowAnonymous]
         [ChildActionOnly]
-        public ActionResult MatrixMenu(string controller = null)
+        public ActionResult MatrixMenu(ViewContext context)
         {
-            //ViewBag.SelectedNav = selectedNav;
-            //ViewBag.UserName = this.User.Identity.Name;
-            var menuList = GetNavMenu();
+            var controller = context.RouteData.Values["controller"].ToString();
+            
+            var user = context.HttpContext.Session["User"] as UserSessionModel;
+           
+            var menuList = GetNavMenu(user.IsManager);
             foreach (var m in menuList)
             {
                 m.IsActive = string.Equals(m.ControllerName, controller, StringComparison.OrdinalIgnoreCase);
             }
-            return PartialView(GetNavMenu());
+            return PartialView(menuList);
         }
         [AllowAnonymous]
         public ActionResult MatrixContentHeader(RouteData routeData) 

@@ -7,9 +7,9 @@
 <div class="container-fluid">
     <div class="quick-actions_homepage">
         <ul class="quick-actions">
-            <li class="bg_lb span3"> <a href="@Url.Action("Index","AppManage")"> <i class="icon-key"></i> <span class="label label-important">@Model.AppCount</span> 应用管理 </a> </li>
+            <li class="bg_ly span3"> <a href="@Url.Action("Index","AppManage")"> <i class="icon-key"></i> <span class="label label-important">@Model.AppCount</span> 应用管理 </a> </li>
             <li class="bg_lg span3"> <a href="@Url.Action("Index", "PermissionManage")"> <i class="icon-lock"></i><span class="label label-warning">@Model.PermissionCount</span> 权限管理</a> </li>
-            <li class="bg_ly span3"> <a href="@Url.Action("Index", "Extension")"> <i class="icon-cogs"></i> 扩展管理 </a> </li>
+            @*<li class="bg_ly span3"> <a href="@Url.Action("Index", "Extension")"> <i class="icon-cogs"></i> 扩展管理 </a> </li>*@
         </ul>
     </div>
 </div>
