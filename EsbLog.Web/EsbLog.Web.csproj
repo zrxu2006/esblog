@@ -212,6 +212,7 @@
     <Compile Include="Models\LoginUserViewModel.cs" />
     <Compile Include="Models\NavViewModel.cs" />
     <Compile Include="Models\PermissionQueryRequest.cs" />
+    <Compile Include="Models\UserSessionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

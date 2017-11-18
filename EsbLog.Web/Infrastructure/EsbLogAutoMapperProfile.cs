@@ -47,7 +47,12 @@ namespace EsbLog.Web.Infrastructure
 
             CreateMap<LoginUser, LoginUserEditModel>()
                 .ForMember(dest => dest.AppIds, opt => opt.MapFrom(src=>GetAppIds(src.Apps)))
-                .ForMember(dest => dest.AppList, opt => opt.Ignore());                
+                .ForMember(dest => dest.AppList, opt => opt.Ignore());
+
+            CreateMap<LoginUser, UserSessionModel>()
+                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.IsManager, opt => opt.MapFrom(src => src.UserType == "U"))
+                .ForMember(dest => dest.UserApps, opt => opt.MapFrom(src => src.Apps));
         }
 
         private ICollection<App> GetApps(string concatIds)

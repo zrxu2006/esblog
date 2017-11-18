@@ -1,4 +1,5 @@
-﻿using EsbLog.Domain.Platform;
+﻿using AutoMapper;
+using EsbLog.Domain.Platform;
 using EsbLog.Web.Infrastructure;
 using EsbLog.Web.Models;
 using EsbLog.Web.Repository;
@@ -47,7 +48,9 @@ namespace EsbLog.Web.Controllers
             {
                 //Session["User"] = user;
                 _repo.UpdateLoginTime(userId);
-                this.SetUserId(userId);
+                var u = _repo.FindUserById(userId);
+                var userSession = Mapper.Map<UserSessionModel>(u);
+                this.SetUserSession(userSession);
                 FormsAuthentication.SetAuthCookie(user.UserName, false);
                 return Redirect(string.IsNullOrEmpty(returnUrl)
                                     ? Url.Action("Index", "Home",new{id= userId})

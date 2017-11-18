@@ -53,6 +53,7 @@ namespace EsbLog.Web.Controllers
             return PartialView(GetNavMenu());
         }
         [AllowAnonymous]
+        [ChildActionOnly]
         public ActionResult MatrixMenu(string controller = null)
         {
             //ViewBag.SelectedNav = selectedNav;
