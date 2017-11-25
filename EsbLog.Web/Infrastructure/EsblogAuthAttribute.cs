@@ -34,6 +34,14 @@ namespace EsbLog.Web.Infrastructure
                     });
             }
         }
-        
+
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        {
+            if(httpContext.Session["User"] == null)
+            {
+                return false;
+            }
+            return base.AuthorizeCore(httpContext);
+        }
     }
 }

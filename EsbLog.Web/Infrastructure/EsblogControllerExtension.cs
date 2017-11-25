@@ -28,13 +28,18 @@ namespace EsbLog.Web.Infrastructure
         public static bool IsManagerUser(this Controller controller)
         {
             var us = controller.Session["User"] as UserSessionModel;
-            return us!=null && us.IsManager;
+            return us != null && us.IsManager;
         }
 
         public static void SetUserSession(this Controller controller, UserSessionModel model)
         {
             controller.SetUserId(model.UserId);
             controller.Session["User"] = model;
+        }
+
+        public static UserSessionModel GetUserSession(this Controller controller)
+        {
+            return controller.Session["User"] as UserSessionModel;
         }
     }
 }

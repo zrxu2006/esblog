@@ -25,9 +25,9 @@ namespace EsbLog.Web.Repository.Concrete
             using (var context = _factory.GetPlatformDb())
             {
                 var user = context.Users
-                    .FirstOrDefault(u => u.LoginName == username
-                            && u.Password == md5String
-                            && u.UserType == "M");
+                    .FirstOrDefault(u => u.LoginName.Equals(username, StringComparison.Ordinal)
+                            && u.Password == md5String);
+                            //&& u.UserType == "M");
                 userId = user==null?0:user.Id;                
             }
 

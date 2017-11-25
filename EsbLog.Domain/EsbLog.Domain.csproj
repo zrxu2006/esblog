@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILogRepository.cs" />
+    <Compile Include="Log\LogLevel.cs" />
     <Compile Include="Platform\App.cs" />
     <Compile Include="Platform\LoginUser.cs" />
     <Compile Include="Platform\Permission.cs" />

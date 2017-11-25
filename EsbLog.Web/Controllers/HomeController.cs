@@ -38,8 +38,12 @@ namespace EsbLog.Web.Controllers
                 {
                     m.AppCount = _appRepo.GetCount();
                     m.PermissionCount = _repo.GetCount();
+                    return View(m);
                 }
-                return View(m);
+                else
+                {
+                    return RedirectToAction("Index","Log");
+                }                
             }            
         }
 

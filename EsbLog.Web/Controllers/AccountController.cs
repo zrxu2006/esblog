@@ -52,8 +52,12 @@ namespace EsbLog.Web.Controllers
                 var userSession = Mapper.Map<UserSessionModel>(u);
                 this.SetUserSession(userSession);
                 FormsAuthentication.SetAuthCookie(user.UserName, false);
+
+                string redirectUrl = userSession.IsManager ?
+                    Url.Action("Index", "Home", new { id = userId }) :
+                    Url.Action("Index", "Log");
                 return Redirect(string.IsNullOrEmpty(returnUrl)
-                                    ? Url.Action("Index", "Home",new{id= userId})
+                                    ? redirectUrl
                                     : returnUrl);
             }
             else

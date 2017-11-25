@@ -59,8 +59,8 @@ namespace EsbLog.Web.Controllers
 
                 _navAppMenu.Add(new NavViewModel
                 {
-                    NavName = "日志查询",
-                    ControllerName = "LogReport",
+                    NavName = "报表管理",
+                    ControllerName = "Report",
                     ActionName = "Index"
                 });
             }
