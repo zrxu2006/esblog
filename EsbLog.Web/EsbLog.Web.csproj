@@ -197,6 +197,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\NavController.cs" />
+    <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\PermissionManageController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Global.asax.cs">
@@ -214,6 +215,8 @@
     <Compile Include="Models\LoginUserAddModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
     <Compile Include="Models\LogModel.cs" />
+    <Compile Include="Models\LogPagingRequestModel.cs" />
+    <Compile Include="Models\LogRequestModel.cs" />
     <Compile Include="Models\NavViewModel.cs" />
     <Compile Include="Models\PermissionQueryRequest.cs" />
     <Compile Include="Models\UserSessionModel.cs" />
@@ -239,6 +242,7 @@
     <Content Include="Views\Account\EditPsw.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Partial\LogPaging.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EsbLog.Domain.Log;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,6 @@ namespace EsbLog.Domain
     {
         //int Save(Log entity);
         //Task<int> SaveAsync(Log entity);
+        Task<IEnumerable<LogEntry>> GetLogsAsync(LogQueryRequest queryRequest);
     }
 }

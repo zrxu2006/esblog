@@ -1,4 +1,5 @@
 ﻿using EsbLog.Domain.Log;
+using EsbLog.Domain.Paging;
 using EsbLog.Domain.Platform;
 using System;
 using System.Collections.Generic;
@@ -32,23 +33,8 @@ namespace EsbLog.Web.Models
         public DateTime Time { get; set; }
     }
 
-    public class PagingRequest<T>
+    public class LogPagingResultModel:PagingResult<LogResultModel>
     {
-        public T Request { get; set; }
-        public int PageSize { get; set; }
-        public int Index { get; set; }
-    }
-
-    public class PagingResult<T>
-    {
-        public PagingResult()
-        {
-            Result = new HashSet<T>();
-        }
-    
-        public ICollection<T> Result { get; set; }
-        public int PageSize { get; set; }
-        public int Index { get; set; }
-        public int Count { get; set; }
+        public LogPagingResultModel() : base() { }
     }
 }
