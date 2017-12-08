@@ -52,6 +52,7 @@
     <Compile Include="IConnectionString.cs" />
     <Compile Include="IPlatformDbContext.cs" />
     <Compile Include="Mapping\AppMap.cs" />
+    <Compile Include="Mapping\LogEntryMap.cs" />
     <Compile Include="Mapping\LoginUserMap.cs" />
     <Compile Include="Mapping\PermissionMap.cs" />
     <Compile Include="PlatformDbContext.cs" />

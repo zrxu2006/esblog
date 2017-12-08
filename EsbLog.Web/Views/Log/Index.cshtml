@@ -1,0 +1,192 @@
+﻿@model EsbLog.Web.Models.LogModel
+
+@{
+    ViewBag.Title = "日志查询";
+    AjaxOptions option = new AjaxOptions
+    {
+        UpdateTargetId="queryResult",
+        Url = Url.Action("Index","Log"),
+        HttpMethod = "POST"                
+    };
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/Matrix/css/uniform.css" />
+    <link rel="stylesheet" href="~/Content/Matrix/css/select2.css" />
+    <link rel="stylesheet" href="~/Content/Matrix/css/datepicker.css" />
+}
+@section scripts{
+    <script src="~/Content/Matrix/js/jquery.uniform.js"></script>
+    <script src="~/Content/Matrix/js/select2.min.js"></script>
+    @*<script src="~/Content/Matrix/js/jquery.dataTables.min.js"></script>*@
+    @*<script src="~/Content/Matrix/js/matrix.tables.js"></script>*@
+    <script src="~/Content/Matrix/js/bootstrap-datepicker.js"></script>
+    <script src="~/Content/Matrix/js/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select').select2();          
+
+            @*dt = $('.data-table').dataTable({
+                bFilter: false,
+                "bLengthChange": false,
+                "bJQueryUI": true,
+                "sPaginationType": "full_numbers",
+                "sDom": '<""l>t<"F"fp>',
+                "oLanguage": {
+                    "sLengthMenu": "每页显示 _MENU_ 条记录",
+                    "sZeroRecords": "对不起，查询不到任何相关数据",
+                    "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+                    "sInfoEmtpy": "找不到相关数据",
+                    "sInfoFiltered": "数据表中共为 _MAX_ 条记录)",
+                    "sProcessing": "正在加载中...",
+                    "sSearch": "搜索",
+                    "sUrl": "", //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt  
+                    "oPaginate": {
+                        "sFirst": "第一页",
+                        "sPrevious": " 上一页 ",
+                        "sNext": " 下一页 ",
+                        "sLast": " 最后一页 "
+                    }
+                }, //多语言配置 
+                "sAjaxSource": '@Url.Action("index")'
+            });*@
+
+            //function reloadTable() {
+               
+            //    var param = {};
+            //    param.Index = 1;
+            //    dt.settings()[0].ajax.data = param;
+            //    dt.ajax.reload();
+            //}
+
+            //$('#btnSubmit').click(reloadTable);
+            $(document.body).on("change", '#selApps',
+                function (ev) {
+                    var choice;
+                    var values = ev.val;
+                    // This is assuming the value will be an array of strings.
+                    // Convert to a comma-delimited string to set the value.
+                    if (values !== null && values.length > 0) {
+                        for (var i = 0; i < values.length; i++) {
+                            if (typeof choice !== 'undefined') {
+                                choice += ",";
+                                choice += values[i];
+                            }
+                            else {
+                                choice = values[i];
+                            }
+                        }
+                    }
+
+                    $('#AppIds').val(choice);
+                });
+
+            $(document.body).on("change", '#selLogLevels',
+                function (ev) {
+                    var choice;
+                    var values = ev.val;
+                    // This is assuming the value will be an array of strings.
+                    // Convert to a comma-delimited string to set the value.
+                    if (values !== null && values.length > 0) {
+                        for (var i = 0; i < values.length; i++) {
+                            if (typeof choice !== 'undefined') {
+                                choice += ",";
+                                choice += values[i];
+                            }
+                            else {
+                                choice = values[i];
+                            }
+                        }
+                    }
+
+                    $('#LogLevels').val(choice);
+                });
+        });
+</script>
+}
+
+<div class="row-fluid">
+    @*<div class="span12">*@
+        <div class="widget-box">
+            <div class="widget-title" data-toggle="collapse" href="#logCondition">
+                <span class="icon"> <i class="icon-chevron-down"></i> </span>
+                <h5>查询条件</h5>
+            </div>
+            <div class="widget-content nopadding" id="logCondition">
+                @using (@Ajax.BeginForm("Index", null, option, new { @class = "form-horizontal" }))
+                {
+                    @*@Html.AntiForgeryToken()*@
+                @*<form class="form-horizontal">*@
+                    <div class="control-group">
+                        <label class="control-label ">应用名称：</label>
+                        <div class="controls">
+                            <select id="selApps" multiple>
+                                @if (Model.Apps != null)
+                                {
+                                    foreach (var app in Model.Apps)
+                                    {
+                                        <option value="@app.AppId">@app.Name</option>
+                                    }
+                                }
+                            </select>
+                            @Html.HiddenFor(m => m.AppIds);                            
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label ">日志级别：</label>
+                        <div class="controls">
+                            <select id="selLogLevels" multiple>
+                                @if (Model.LogLevelNames != null)
+                                {
+                                    foreach (var log in Model.LogLevelNames)
+                                    {
+                                        <option value="@log">@log</option>
+                                    }
+                                }
+                            </select>
+                            @Html.HiddenFor(m=>m.LogLevels)
+                            @Html.Hidden("PageSize",10)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">时间范围：</label>
+                        <div class="controls">
+                            @{
+                                var startDate = DateTime.Now.AddMonths(-1);
+                                var endDate = DateTime.Now;
+                            }
+                            <input type="text" name="StartDate" data-date="@startDate.ToString("yyyy-MM-dd")" data-date-format="yyyy-mm-dd" value="@startDate.ToString("yyyy-MM-dd")" class="datepicker span5">
+                            &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+                            <input type="text" name="EndDate" data-date="@endDate.ToString("yyyy-MM-dd")" data-date-format="yyyy-mm-dd" value="@endDate.ToString("yyyy-MM-dd")" class="datepicker span5">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button id="btnSubmit" type="submit" class="btn btn-success">查询</button>
+                    </div>
+                }
+                @*</form>*@
+            </div>
+        </div>
+
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"><i class="icon-th"></i></span>
+                <h5>日志查询</h5>
+            </div>
+            <div id="queryResult" class="widget-content nopadding">
+
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>应用名称</th>
+                            <th>日志级别</th>
+                            <th>日志内容</th>
+                            <th>时间</th>
+                        </tr>
+                    </thead>                    
+                </table>               
+            </div>
+        </div>
+
+    @*</div>*@
+</div>

@@ -1,0 +1,100 @@
+﻿@model EsbLog.Web.Models.LogPagingPartialViewModel
+@using EsbLog.Web.Models
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>应用名称</th>
+            <th>日志级别</th>
+            <th>日志内容</th>
+            <th>时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (LogResultModel log in Model.Result.ResultData)
+        {
+            <tr class="success">
+                <td>@log.AppName</td>
+                <td>@log.LogLevel</td>
+                <td>@log.Message</td>
+                <td>@log.Time</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (Model.Result.ResultData.Count > 0)
+{
+    <div class="pagination alternate pull-right">
+        <ul>
+@{
+        long lastPageIndex = Model.Result.LastPageIndex;
+        long currentPageIndex = Model.Result.PageIndex;
+        long remainPages = lastPageIndex - currentPageIndex;
+        string active = 0 == currentPageIndex ? "active" : string.Empty;
+}
+        <li class="@active">
+        @Ajax.ActionLink("1", "LogPaging", "Partial",
+                                        @Model.Request.Copy(0),
+                                        new AjaxOptions
+                                        {
+                                            UpdateTargetId = Model.UpdateTargetId,
+                                            HttpMethod = "Post"
+                                        })
+        </li>
+    @if (lastPageIndex > 10 
+        && currentPageIndex >= 4)
+    {
+        <li class="disabled"><a>...</a></li>
+    }
+
+@{
+    long startDisplayIndex = 0;
+    long endDisplayIndex = 0;
+    
+    if (remainPages < 5)
+    {
+        startDisplayIndex = lastPageIndex - 7;
+        endDisplayIndex = lastPageIndex;
+        startDisplayIndex = startDisplayIndex < 0 ? 0 : startDisplayIndex;
+    }
+    else
+    {
+        startDisplayIndex = currentPageIndex - 2;
+        endDisplayIndex = currentPageIndex + 3;
+        startDisplayIndex = currentPageIndex >= 4 ? startDisplayIndex : 1;
+        endDisplayIndex = endDisplayIndex <= 6 ? 6 : endDisplayIndex;
+        if (startDisplayIndex == 1) { endDisplayIndex++; }
+    }
+}
+    @for (long i = startDisplayIndex; i <= endDisplayIndex; i++)
+    {
+        active = i == currentPageIndex ? "active" : string.Empty;
+        <li class="@active">
+            @Ajax.ActionLink((i + 1).ToString(), "LogPaging", "Partial",
+                                        @Model.Request.Copy(i),
+                                        new AjaxOptions
+                                        {
+                                            UpdateTargetId = Model.UpdateTargetId,
+                                            HttpMethod = "Post"
+                                        })
+        </li>
+    }
+
+    @if (remainPages >= 5){
+        active = lastPageIndex == currentPageIndex ? "active" : string.Empty;
+        <li class="disabled"><a>...</a></li>
+        <li class="@active">
+            @Ajax.ActionLink((lastPageIndex + 1).ToString(), "LogPaging", "Partial",
+                                         @Model.Request.Copy(lastPageIndex),
+                                        new AjaxOptions
+                                        {
+                                            UpdateTargetId = Model.UpdateTargetId,
+                                            HttpMethod = "Post"
+                                        })
+        </li>
+    }
+    </ul>
+    </div>
+}
+
+

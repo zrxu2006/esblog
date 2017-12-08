@@ -69,6 +69,7 @@ namespace EsbLog.Web.App_Start
             kernel.Bind<PlatformDbFactory>().ToMethod(c => new PlatformDbFactory(c.Kernel.Get<IConnectionString>())
                     ).InSingletonScope();
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
+            kernel.Bind<ILogRepository>().To<LogRepository>();
         }        
     }
 }

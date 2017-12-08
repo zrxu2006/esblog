@@ -12,11 +12,11 @@ namespace EsbLog.Web.Models
     {
         public LogModel()
         {
-            Logs = new List<LogResultModel>();
+            //Logs = new List<LogResultModel>();
             LogLevelNames = LogLevelExtention.GetLogLevelNames();
             Apps = new List<App>();
         }
-        public IEnumerable<LogResultModel> Logs { get; set; }
+        //public IEnumerable<LogResultModel> Logs { get; set; }
         public IEnumerable<App> Apps { get; set; }
         public IEnumerable<string> LogLevelNames { get; set; }
         public string AppIds { get; set; }

@@ -1,4 +1,5 @@
-﻿using EsbLog.Domain.Platform;
+﻿using EsbLog.Domain.Log;
+using EsbLog.Domain.Platform;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +14,8 @@ namespace EsbLog.Platform.Database
         IDbSet<App> Apps { get; }
         IDbSet<LoginUser> Users { get; }
         IDbSet<Permission> Permissions { get; }
+        IDbSet<LogEntry> Logs { get; }
+
         int SaveChanges();
         Task<int> SaveChangesAsync();
         System.Data.Entity.Database Database { get; }

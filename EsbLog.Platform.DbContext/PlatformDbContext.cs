@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Data.Entity.Validation;
 using System.Data;
 using System.Data.Entity.SqlServer;
+using EsbLog.Domain.Log;
 
 namespace EsbLog.Platform.Database
 {
@@ -90,6 +91,7 @@ namespace EsbLog.Platform.Database
         public IDbSet<App> Apps { get; set; }
         public IDbSet<LoginUser> Users { get; set; }
         public IDbSet<Permission> Permissions { get; set; }
+        public IDbSet<LogEntry> Logs { get; set; }
     }
 
     public class SqlServerProviderConfiguration : DbConfiguration

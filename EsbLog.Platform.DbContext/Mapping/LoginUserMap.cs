@@ -24,11 +24,13 @@ namespace EsbLog.Platform.Database.Mapping
             Property(l => l.Password).HasColumnName("Password");
             Property(l => l.LoginTime).HasColumnName("LoginTime");
             Property(l => l.UserType).HasColumnName("UserType");
-            //HasMany(l => l.Apps).WithOptional().Map(m =>
-            //{
-            //    m.ToTable("tblUserApp");
-            //    m.MapKey()
-            //});
+            HasMany(l => l.Apps).WithMany(a=>a.Users)
+            .Map(m =>
+            {
+                m.ToTable("tblUserApp");
+                m.MapLeftKey("UserId");
+                m.MapRightKey("AppId");
+            });
         }
     }
 }
