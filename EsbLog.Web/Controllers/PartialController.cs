@@ -23,27 +23,37 @@ namespace EsbLog.Web.Controllers
         {
             return View();
         }
-        
+
         public PartialViewResult LogPaging(LogPagingRequestModel request)
-        {
+        {  
+            var queryRequest = new LogQueryRequest
+            {
+                AppIds = request.AppIds,
+                EndDate = request.EndDate,
+                LogLevels = request.LogLevels,
+                PageIndex = request.PageIndex,
+                PageSize = request.PageSize,
+                StartDate = request.StartDate
+            };
+            LogQueryResult logs = _repo.GetLogsAsync(queryRequest)
+                        .GetAwaiter().GetResult();
+         
             var model = new LogPagingPartialViewModel(request);
-            ////_repo.GetLogsAsync()
-            //model.Result.PageIndex = request.PageIndex;
-            //model.Result.PageSize = request.PageSize;
-            //model.Result.Total = 200;
-            //model.Result.ResultData.Add(new LogResultModel
-            //{
-            //    AppName = "App1",
-            //    LogLevel = "Debug",
-            //    Message = "asdf",
-            //    Time = DateTime.Now
-            //});
-            //model.UpdateTargetId = "queryResult";
-            var queryRequest = new LogQueryRequest();
 
-            var logs = _repo.GetLogsAsync(queryRequest);
-
+            LogPagingResultModel result = model.Result;
+            result.PageIndex = request.PageIndex;
+            result.PageSize = request.PageSize;
+            result.ResultData = new HashSet<LogResultModel>(logs
+                                .ResultData
+                                .Select(l => new LogResultModel
+                                {
+                                    AppName = l.App.Name,
+                                    LogLevel = l.LogLevel,
+                                    Message = l.Message,
+                                    Time = l.Creation
+                                })
+                                .ToList());
             return PartialView("LogPaging", model);
         }
-	}
+    }
 }

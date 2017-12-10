@@ -48,14 +48,14 @@
     }
 
 @{
-    long startDisplayIndex = 0;
+    long startDisplayIndex = 1;
     long endDisplayIndex = 0;
     
     if (remainPages < 5)
     {
         startDisplayIndex = lastPageIndex - 7;
         endDisplayIndex = lastPageIndex;
-        startDisplayIndex = startDisplayIndex < 0 ? 0 : startDisplayIndex;
+        startDisplayIndex = startDisplayIndex < 0 ? 1 : startDisplayIndex;
     }
     else
     {

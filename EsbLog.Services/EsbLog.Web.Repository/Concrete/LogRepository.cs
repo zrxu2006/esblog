@@ -9,19 +9,21 @@ using System.Data.Entity;
 
 namespace EsbLog.Web.Repository.Concrete
 {
-    public class LogRepository:ILogRepository
+    public class LogRepository : ILogRepository
     {
         PlatformDbFactory _factory;
         public LogRepository(PlatformDbFactory dbFactory)
         {
-            _factory = dbFactory; 
+            _factory = dbFactory;
         }
-        public async Task<IEnumerable<LogEntry>> GetLogsAsync(LogQueryRequest queryRequest)
+        public async Task<LogQueryResult> GetLogsAsync(LogQueryRequest queryRequest)
         {
+            LogQueryResult returnResult = new LogQueryResult();
+
             using (var db = _factory.GetPlatformDb())
             {
-                var result = db.Logs
-                                .Include(l => l.App);
+                IQueryable<LogEntry> query = db.Logs.AsNoTracking()
+                                            .Include(l=>l.App);
 
                 var appids = (queryRequest.AppIds??string.Empty).Split(',')
                                     .Select(s => ParseToInt(s))
@@ -31,30 +33,49 @@ namespace EsbLog.Web.Repository.Concrete
                                     .Where(l => !string.IsNullOrEmpty(l))
                                     .ToList();
 
-                if (appids.Count > 0)
+                if(appids.Count>0)
                 {
-                    result.Where(l => appids.Contains(l.AppId));
-                }
-                if (levels.Count > 0)
-                {
-                    result.Where(l => levels.Contains(l.LogLevel
-                                    , StringComparer.OrdinalIgnoreCase));
-                }
-                if (queryRequest.StartDate.HasValue)
-                {
-                    result.Where(l => l.Creation >= queryRequest.StartDate.Value);
-                }
-                if (queryRequest.EndDate.HasValue)
-                {
-                    result.Where(l => l.Creation < queryRequest.EndDate.Value.AddDays(1));
+                    query = query.Where(l => appids.Contains(l.AppId));
+
                 }
 
+                if(levels.Count>0)
+                {
+                    query = query.Where(l => levels.Contains(l.LogLevel
+                                    , StringComparer.OrdinalIgnoreCase));
+                }
+
+                if(queryRequest.StartDate.HasValue)
+                {
+                    query = query.Where(l => queryRequest.StartDate.HasValue
+                                && l.Creation >= queryRequest.StartDate.Value);                   
+                }
+
+                if(queryRequest.EndDate.HasValue)
+                {
+                    DateTime endDate = queryRequest.EndDate.Value.AddDays(1);
+                    query = query.Where(l=> queryRequest.EndDate.HasValue
+                                && l.Creation < endDate);                  
+                }
+                      
                 int pageSize = queryRequest.PageSize == 0 ? 10 :
                                 queryRequest.PageSize;
                 int pageIndex = (int)queryRequest.PageIndex;
-                return await result.Skip(pageIndex * pageSize)
+
+                var list = query
+                            .OrderBy(l => l.Creation)
+                            .Skip(pageIndex * pageSize)
                             .Take(pageSize)
-                            .ToListAsync();
+                            .ToList();
+                var count = query
+                            .Count();
+                               
+                returnResult.PageIndex = queryRequest.PageIndex;
+                returnResult.PageSize = queryRequest.PageSize;
+                returnResult.Total = count;
+                returnResult.ResultData = new HashSet<LogEntry>(list);
+
+                return await Task.FromResult(returnResult);
             }
         }
 

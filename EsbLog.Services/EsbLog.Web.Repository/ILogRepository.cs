@@ -9,6 +9,6 @@ namespace EsbLog.Web.Repository
 {
     public interface ILogRepository
     {
-        Task<IEnumerable<LogEntry>> GetLogsAsync(LogQueryRequest queryRequest);
+        Task<LogQueryResult> GetLogsAsync(LogQueryRequest queryRequest);
     }
 }

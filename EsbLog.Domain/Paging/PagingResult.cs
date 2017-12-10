@@ -15,7 +15,7 @@ namespace EsbLog.Domain.Paging
         public virtual int PageSize { get; set; }
         public virtual long Total { get; set; }
         public virtual long PageIndex { get; set; }
-        public ICollection<T> ResultData { get; private set; }
+        public ICollection<T> ResultData { get; set; }
 
         public bool HasMore
         {

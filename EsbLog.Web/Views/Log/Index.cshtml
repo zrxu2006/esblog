@@ -17,13 +17,15 @@
 @section scripts{
     <script src="~/Content/Matrix/js/jquery.uniform.js"></script>
     <script src="~/Content/Matrix/js/select2.min.js"></script>
-    @*<script src="~/Content/Matrix/js/jquery.dataTables.min.js"></script>*@
+    <script src="~/Content/Matrix/js/jquery.dataTables.min.js"></script>
     @*<script src="~/Content/Matrix/js/matrix.tables.js"></script>*@
     <script src="~/Content/Matrix/js/bootstrap-datepicker.js"></script>
     <script src="~/Content/Matrix/js/jquery.unobtrusive-ajax.js"></script>
+    
     <script>
         $(document).ready(function () {
             $('select').select2();          
+            $('.datepicker').datepicker();
 
             @*dt = $('.data-table').dataTable({
                 bFilter: false,
@@ -175,7 +177,7 @@
             </div>
             <div id="queryResult" class="widget-content nopadding">
 
-                <table class="table table-bordered table-hover">
+                @*<table class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>应用名称</th>
@@ -184,7 +186,7 @@
                             <th>时间</th>
                         </tr>
                     </thead>                    
-                </table>               
+                </table>*@               
             </div>
         </div>
 

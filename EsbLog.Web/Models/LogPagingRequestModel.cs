@@ -7,7 +7,7 @@ using System.Web;
 namespace EsbLog.Web.Models
 {
     public class LogPagingRequestModel : PagingRequest
-    {
+    {       
         public string AppIds { get; set; }
         public string LogLevels { get; set; }
         public DateTime? StartDate { get; set; }
