@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EsbLog.Platform.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,9 +10,16 @@ namespace EsbLog.WebApi.Controllers
 {
     public class ValuesController : ApiController
     {
+        IPlatformDbContext _db;
+        //public ValuesController(IPlatformDbContext db)
+        //{
+        //    _db = db;
+        //}
+
         // GET api/values
         public IEnumerable<string> Get()
         {
+
             log4net.LogManager.GetLogger("EsbLog.App.Log").Info("values get");
             return new string[] { "value1", "value2" };
 

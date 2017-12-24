@@ -39,14 +39,16 @@ namespace EsbLog.WebApi
 
         IBusControl ConfigureBus()
         {
-            return Bus.Factory.CreateUsingRabbitMq(cfg =>
-            {
-                var host = cfg.Host(new Uri("rabbitmq://localhost"), h =>
-                {
-                    h.Username("guest");
-                    h.Password("guest");
-                });
-            });
+            //return Bus.Factory.CreateUsingRabbitMq(cfg =>
+            //{
+            //    var host = cfg.Host(new Uri("rabbitmq://localhost"), h =>
+            //    {
+            //        h.Username("guest");
+            //        h.Password("guest");
+            //    });
+            //});
+
+            return Bus.Factory.CreateUsingInMemory(c => { });
         }
     }
 }

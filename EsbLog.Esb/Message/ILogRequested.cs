@@ -29,6 +29,6 @@ namespace EsbLog.Esb.Message
         /// <summary>
         /// 时间戳
         /// </summary>
-        long Ticks { get; }
+        DateTime Time { get; }
     }
 }

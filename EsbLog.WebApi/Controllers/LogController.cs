@@ -25,11 +25,16 @@ namespace EsbLog.WebApi.Controllers
 
             await WebApiApplication.LogBus.Publish<ILogRequested>(new 
             {
-                AppId = value.AppId,
+                AppId = value.AppCode,
                 LogLevel = value.LogLevel,
-                Content= DateTime.Now.ToString(),
-                Ticks = DateTime.Now.Ticks
+                Content= value.Message,
+                Time = value.Time                
             });
+
+            var sd = await WebApiApplication.LogBus.GetSendEndpoint(new Uri(""));
+            //sd.Send<lo
+                
+                
             
             log.Info("Post 结束");
         }

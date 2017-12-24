@@ -15,7 +15,7 @@
     <AssemblyName>EsbLog.WebApi</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -155,6 +155,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ControllerExtensions.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -180,6 +181,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EsbLog.Domain\EsbLog.Domain.csproj">
+      <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
+      <Name>EsbLog.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EsbLog.Esb\EsbLog.Esb.csproj">
       <Project>{035464af-ea2f-4c37-ad6d-e296e0c47b3e}</Project>
       <Name>EsbLog.Esb</Name>
@@ -187,6 +192,10 @@
     <ProjectReference Include="..\EsbLog.Log4Net\EsbLog.Log4Net.csproj">
       <Project>{0ec1a6f0-5866-4ad1-9d87-742be0db6dff}</Project>
       <Name>EsbLog.Log4Net</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Platform.DbContext\EsbLog.Platform.Database.csproj">
+      <Project>{70199047-1c62-4325-98ff-53363022b21d}</Project>
+      <Name>EsbLog.Platform.Database</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -218,7 +227,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1097</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1097/</IISUrl>
+          <IISUrl>http://localhost/EsbLog.WebApi</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

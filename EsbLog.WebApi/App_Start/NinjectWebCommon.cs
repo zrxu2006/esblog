@@ -13,6 +13,7 @@ namespace EsbLog.WebApi.App_Start
     using System.Web.Http;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using EsbLog.Platform.Database;
 
     public static class NinjectWebCommon 
     {
@@ -69,7 +70,14 @@ namespace EsbLog.WebApi.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-           
+            kernel.Bind<IConnectionString>().To<PlatformConnectionStringProvider>();
+            kernel.Bind<IPlatformDbContext>()
+                    .ToMethod(c => new PlatformDBContext(c.Kernel.Get<IConnectionString>().ConnectionString))
+                    .InSingletonScope();
+
+            //kernel.Bind<PlatformDbFactory>()
+            //    .ToMethod(c => new PlatformDbFactory(c.Kernel.Get<IConnectionString>()))
+            //    .InRequestScope();
         }        
     }
 }

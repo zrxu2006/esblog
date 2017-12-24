@@ -25,7 +25,7 @@ namespace EsbLog.WebApi.Tests.Controllers
             controller.Configuration = new HttpConfiguration();
 
             LogRequest r = new LogRequest();
-            r.AppId = "Test1";
+            r.AppCode = "Test1";
             r.LogLevel = "Debug";
             controller.Post(r);
         }
@@ -65,7 +65,7 @@ namespace EsbLog.WebApi.Tests.Controllers
         private void task()
         {
             LogRequest r = new LogRequest();
-            r.AppId = "ttt";
+            r.AppCode = "ttt";
             r.LogLevel = "ddd";
 
             HttpPost req = new HttpPost("http://localhost:8888/api/log");
@@ -96,7 +96,7 @@ namespace EsbLog.WebApi.Tests.Controllers
                 HttpResponseMessage responseMessage = await hc.GetAsync("http://localhost:8988/api/values");
 
                 LogRequest r = new LogRequest();
-                r.AppId = "TTT";
+                r.AppCode = "TTT";
                 r.LogLevel = "sssss";
 
                 //var responseMessage = await hc.PostAsJsonAsync<LogRequest>("http://localhost:8888/api/log", r);

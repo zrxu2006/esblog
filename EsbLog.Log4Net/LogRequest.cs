@@ -12,15 +12,15 @@ namespace EsbLog.Log4Net
     public class LogRequest
     {
         /// <summary>
-        /// 应用Id
+        /// 应用Code
         /// </summary>
-        public string AppId { get; set; }
+        public string AppCode { get; set; }
 
         /// <summary>
         /// 日志等级
         /// </summary>
         public string LogLevel { get; set; }
-
-       
+        public string Message { get; set; }
+        public DateTime Time { get; set; }
     }
 }
