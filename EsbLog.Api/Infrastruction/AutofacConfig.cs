@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using EsbLog.Api.App_Start;
+using log4net;
 using MassTransit;
 using System;
 using System.Collections.Generic;
@@ -13,14 +15,13 @@ namespace EsbLog.Api.Infrastruction
 {
     public class AutofacConfig
     {
-        public static void Build()
+        public static IContainer Build()
         {
             var builder = new ContainerBuilder();
 
             // Get your HttpConfiguration.
             var config = GlobalConfiguration.Configuration;
-
-
+            
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
@@ -33,6 +34,10 @@ namespace EsbLog.Api.Infrastruction
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
             builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
 
+            var log = LogManager.GetLogger(Log4netLoggerName.ESBLOG_API);
+            builder.Register(c => log)
+                    .SingleInstance();
+
             RegisterMassTransit(builder);
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
@@ -41,6 +46,8 @@ namespace EsbLog.Api.Infrastruction
             // start bus
             var bc = container.Resolve<IBusControl>();
             bc.Start();
+
+            return container;
         }
 
         private static void RegisterMassTransit(ContainerBuilder builder)

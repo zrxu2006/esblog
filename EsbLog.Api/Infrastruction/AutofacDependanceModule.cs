@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Core;
 using EsbLog.Platform.Database;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace EsbLog.Api.Infrastruction
                     ).As<IPlatformDbContext>()
                     .SingleInstance();
         }
+
     }
 }

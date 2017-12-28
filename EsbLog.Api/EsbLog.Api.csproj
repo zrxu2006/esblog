@@ -53,6 +53,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MassTransit">
       <HintPath>..\packages\MassTransit.3.2.4\lib\net45\MassTransit.dll</HintPath>
     </Reference>
@@ -114,7 +117,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\Log4netConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -125,6 +130,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -140,6 +148,14 @@
     <ProjectReference Include="..\EsbLog.Domain\EsbLog.Domain.csproj">
       <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
       <Name>EsbLog.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Esb\EsbLog.Esb.csproj">
+      <Project>{035464af-ea2f-4c37-ad6d-e296e0c47b3e}</Project>
+      <Name>EsbLog.Esb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Log4Net\EsbLog.Log4Net.csproj">
+      <Project>{0ec1a6f0-5866-4ad1-9d87-742be0db6dff}</Project>
+      <Name>EsbLog.Log4Net</Name>
     </ProjectReference>
     <ProjectReference Include="..\EsbLog.Platform.DbContext\EsbLog.Platform.Database.csproj">
       <Project>{70199047-1c62-4325-98ff-53363022b21d}</Project>
