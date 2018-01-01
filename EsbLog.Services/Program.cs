@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using EsbLog.Services.Dependancies;
+using log4net;
 using log4net.Config;
 using System;
 using System.Collections.Generic;
@@ -7,23 +8,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Topshelf;
+using Topshelf.Autofac;
 
 namespace EsbLog.Services
 {
     class Program
     {
         static void Main(string[] args)
-        {            
-            HostFactory.Run(cfg =>
+        {
+            var container = AutofacConfig.BuildAutofacContainer();
+
+            HostFactory.Run(c =>
             {
-                cfg.Service(x => new EsbLogConsumerService());
+                c.UseAutofacContainer(container);
 
-                cfg.RunAsLocalSystem();
+                c.Service<TestService>(x =>
+                {
+                    x.ConstructUsingAutofacContainer();
+                    x.WhenStarted(s => s.Start());
+                    x.WhenStopped(s => s.Stop());
+                });
 
-                cfg.SetDescription("EsbLog service");
-                cfg.SetDisplayName("EsbLog 服务");
-                cfg.SetServiceName("EsbLogService");
+                c.RunAsLocalSystem();
+
+                c.SetDescription("Test service");
+                c.SetDisplayName("Test 服务");
+                c.SetServiceName("Test Service");
             });
+            //HostFactory.Run(cfg =>
+            //{
+            //    cfg.Service<EsbLogConsumerService>(c =>
+            //    {
+            //        c.WhenStarted(s => s.Start());
+            //    });
+            //    cfg.Service(x => new EsbLogConsumerService());
+
+            //    cfg.RunAsLocalSystem();
+
+            //    cfg.SetDescription("EsbLog service");
+            //    cfg.SetDisplayName("EsbLog 服务");
+            //    cfg.SetServiceName("EsbLogService");
+
+            //});
 
             //Console.ReadKey();
         }

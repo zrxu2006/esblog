@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using EsbLog.Api.App_Start;
+using EsbLog.Esb.Consume;
+using EsbLog.Esb.Message;
 using log4net;
 using MassTransit;
 using System;
@@ -21,7 +23,7 @@ namespace EsbLog.Api.Infrastruction
 
             // Get your HttpConfiguration.
             var config = GlobalConfiguration.Configuration;
-            
+
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
@@ -52,6 +54,7 @@ namespace EsbLog.Api.Infrastruction
 
         private static void RegisterMassTransit(ContainerBuilder builder)
         {
+            builder.RegisterType<SaveLogConsumer>();
             builder.Register(context =>
             {
                 //var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
@@ -70,7 +73,7 @@ namespace EsbLog.Api.Infrastruction
 
                 var busControl = Bus.Factory.CreateUsingInMemory(cfg =>
                 {
-                    cfg.ReceiveEndpoint("customer_update_queue", ec =>
+                    cfg.ReceiveEndpoint("test_queue", ec =>
                     {
                         ec.LoadFrom(context);
                     });

@@ -1,5 +1,7 @@
 ﻿using EsbLog.Domain;
+using EsbLog.Domain.Log;
 using EsbLog.Esb.Message;
+using EsbLog.Esb.Repository;
 using MassTransit;
 using System;
 using System.Collections.Generic;
@@ -14,11 +16,12 @@ namespace EsbLog.Esb.Consume
     /// </summary>
     public class SaveLogConsumer : IConsumer<ILogRequested>
     {
-        //ILogRepository _repository;
-        //public SaveLogConsumer(ILogRepository rep)
-        //{
-        //    _repository = rep;
-        //}
+        ILogRepository _repository;
+        
+        public SaveLogConsumer(ILogRepository repo)
+        {
+            _repository = repo;
+        }
 
         public Task Consume(ConsumeContext<ILogRequested> context)
         {
@@ -32,6 +35,10 @@ namespace EsbLog.Esb.Consume
 
             //return Task.Run(() => repository.Save(log));
             //return _repository.SaveAsync(log);
+            _repository.AddLog(new LogEntry
+            {
+                LogLevel = "Test"
+            });
             return Task.Delay(1);
         }
     }

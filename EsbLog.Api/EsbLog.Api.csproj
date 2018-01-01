@@ -83,6 +83,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -106,6 +107,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Topshelf">
+      <HintPath>..\packages\Topshelf.3.3.1\lib\net40-full\Topshelf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Http.WebHost">
@@ -148,6 +152,10 @@
     <ProjectReference Include="..\EsbLog.Domain\EsbLog.Domain.csproj">
       <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
       <Name>EsbLog.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Esb.Repository\EsbLog.Esb.Repository.csproj">
+      <Project>{0af5d41e-3fb8-4173-9c42-c6ee2809127d}</Project>
+      <Name>EsbLog.Esb.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\EsbLog.Esb\EsbLog.Esb.csproj">
       <Project>{035464af-ea2f-4c37-ad6d-e296e0c47b3e}</Project>

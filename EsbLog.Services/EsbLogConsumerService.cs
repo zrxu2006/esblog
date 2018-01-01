@@ -3,7 +3,6 @@ using EsbLog.Esb.Consume;
 using log4net;
 using log4net.Config;
 using MassTransit;
-using Ninject;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -52,7 +51,7 @@ namespace EsbLog.Services
 
                 cfg.ReceiveEndpoint(host, "esblog_queue", e =>
                 {
-                    e.Consumer<SaveLogConsumer>();                 
+                    //e.Consumer<SaveLogConsumer>();                 
                 });
             });
             //return Bus.Factory.CreateUsingInMemory(cfg =>

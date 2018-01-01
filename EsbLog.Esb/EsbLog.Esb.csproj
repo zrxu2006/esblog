@@ -61,6 +61,10 @@
       <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
       <Name>EsbLog.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Esb.Repository\EsbLog.Esb.Repository.csproj">
+      <Project>{0af5d41e-3fb8-4173-9c42-c6ee2809127d}</Project>
+      <Name>EsbLog.Esb.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
