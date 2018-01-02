@@ -36,8 +36,13 @@
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\EsbLog.WebApi.Tests\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
@@ -63,6 +68,7 @@
       <HintPath>..\packages\RabbitMQ.Client.3.6.2\lib\net45\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
@@ -102,9 +108,17 @@
       <Project>{5822b29c-ff9c-4dfd-92a6-3db386c11fb4}</Project>
       <Name>EsbLog.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Esb.Repository\EsbLog.Esb.Repository.csproj">
+      <Project>{0af5d41e-3fb8-4173-9c42-c6ee2809127d}</Project>
+      <Name>EsbLog.Esb.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EsbLog.Esb\EsbLog.Esb.csproj">
       <Project>{035464af-ea2f-4c37-ad6d-e296e0c47b3e}</Project>
       <Name>EsbLog.Esb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EsbLog.Platform.DbContext\EsbLog.Platform.Database.csproj">
+      <Project>{70199047-1c62-4325-98ff-53363022b21d}</Project>
+      <Name>EsbLog.Platform.Database</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

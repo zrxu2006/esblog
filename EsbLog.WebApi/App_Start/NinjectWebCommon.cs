@@ -72,7 +72,7 @@ namespace EsbLog.WebApi.App_Start
         {
             kernel.Bind<IConnectionString>().To<PlatformConnectionStringProvider>();
             kernel.Bind<IPlatformDbContext>()
-                    .ToMethod(c => new PlatformDBContext(c.Kernel.Get<IConnectionString>().ConnectionString))
+                    .ToMethod(c => new PlatformDbContext(c.Kernel.Get<IConnectionString>().ConnectionString))
                     .InSingletonScope();
 
             //kernel.Bind<PlatformDbFactory>()

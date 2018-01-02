@@ -14,9 +14,9 @@ namespace EsbLog.Platform.Database
             _connectionString = connectionString;
         }
 
-        public PlatformDBContext GetPlatformDb()
+        public PlatformDbContext GetPlatformDb()
         {
-            return new PlatformDBContext(_connectionString.ConnectionString);
+            return new PlatformDbContext(_connectionString.ConnectionString);
         }
     }
 }

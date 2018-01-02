@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using EsbLog.Esb.Consume;
+using EsbLog.Esb.Repository;
+using EsbLog.Platform.Database;
 using MassTransit;
 using System;
 using System.Collections.Generic;
@@ -15,8 +17,15 @@ namespace EsbLog.Services.Dependancies
         {
             var builder = new ContainerBuilder();
 
-
-
+            builder.RegisterType<TestService>();
+            builder.RegisterType<LogRepository>()
+                    .As<ILogRepository>();
+            builder.Register(c => new PlatformDbContext(c.Resolve<IConnectionString>().ConnectionString))
+                .As<IPlatformDbContext>();                    
+            builder.RegisterType<PlatformConnectionStringProvider>()
+                    .As<IConnectionString>()
+                    .SingleInstance();
+            RegisterMassTransit(builder);
             return builder.Build();
         }
 

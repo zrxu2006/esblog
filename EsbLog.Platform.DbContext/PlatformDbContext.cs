@@ -16,17 +16,17 @@ using EsbLog.Domain.Log;
 namespace EsbLog.Platform.Database
 {
     [DbConfigurationType(typeof(SqlServerProviderConfiguration))]
-    public class PlatformDBContext : DbContext,IPlatformDbContext
+    public class PlatformDbContext : DbContext,IPlatformDbContext
     {
-        public PlatformDBContext(string connectString):base(connectString)
+        public PlatformDbContext(string connectString):base(connectString)
         {
         }
 
-        public PlatformDBContext()
+        public PlatformDbContext()
         {
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;
-            System.Data.Entity.Database.SetInitializer(new CreateDatabaseIfNotExists<PlatformDBContext>());
+            System.Data.Entity.Database.SetInitializer(new CreateDatabaseIfNotExists<PlatformDbContext>());
 
             #if DEBUG
             Database.Log = sql => { Debug.WriteLine(sql); };

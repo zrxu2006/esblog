@@ -15,15 +15,15 @@ namespace EsbLog.Api.Infrastruction
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<PlatformConnectionStringProvider>()
-                .As<IConnectionString>();
+                .As<IConnectionString>()
+                .SingleInstance();
             builder.RegisterType<LogRepository>()
                 .As<ILogRepository>();
             builder.Register(c => new EsbMemoryCache("ESB_LOG"))
                     .As<ICache>()
                     .SingleInstance();
-            builder.Register(c => new PlatformDBContext(c.Resolve<IConnectionString>().ConnectionString)
-                    ).As<IPlatformDbContext>()
-                    .SingleInstance();
+            builder.Register(c => new PlatformDbContext(c.Resolve<IConnectionString>().ConnectionString)
+                    ).As<IPlatformDbContext>();
         }
 
     }
