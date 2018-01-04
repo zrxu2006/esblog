@@ -22,7 +22,7 @@ namespace EsbLog.Services
             {
                 c.UseAutofacContainer(container);
 
-                c.Service<TestService>(x =>
+                c.Service<EsbLogConsumerService>(x =>
                 {
                     x.ConstructUsingAutofacContainer();
                     x.WhenStarted(s => s.Start());
@@ -31,9 +31,9 @@ namespace EsbLog.Services
 
                 c.RunAsLocalSystem();
 
-                c.SetDescription("Test service");
-                c.SetDisplayName("Test 服务");
-                c.SetServiceName("Test Service");
+                c.SetDescription("EsbLog service");
+                c.SetDisplayName("EsbLog 服务");
+                c.SetServiceName("EsbLog Service");
             });
             //HostFactory.Run(cfg =>
             //{

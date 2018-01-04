@@ -148,10 +148,6 @@
       <Project>{aaabc9fc-da05-421f-993f-e01bb1739e24}</Project>
       <Name>EsbLog.Tools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EsbLog.WebApi\EsbLog.WebApi.csproj">
-      <Project>{0BC5D12B-7119-4CC7-A2A6-34E15EEBDE0C}</Project>
-      <Name>EsbLog.WebApi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EsbLog.Web\EsbLog.Web.csproj">
       <Project>{eec7276d-c9dd-47cc-843e-54bf42f3f979}</Project>
       <Name>EsbLog.Web</Name>

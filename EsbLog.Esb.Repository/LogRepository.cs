@@ -10,16 +10,31 @@ namespace EsbLog.Esb.Repository
 {
     public class LogRepository:ILogRepository
     {
-        IPlatformDbContext _context;
-        public LogRepository(IPlatformDbContext context)
+        PlatformDbFactory _factory;
+        public LogRepository(PlatformDbFactory factory)
         {
-            _context = context;
+            _factory = factory;
         }
-        public Task<bool> AddLog(LogEntry log)
+        public async Task<bool> AddLog(LogEntry log)
         {
-            string t = log.LogLevel;
-            return Task.FromResult(true);
-            //throw new NotImplementedException();
+            try
+            {
+                using (var db = _factory.GetPlatformDb())
+                {
+                    if (log != null)
+                    {
+                        log.Creation = log.Creation ?? DateTime.Now;
+                        db.Logs.Add(log);
+                        await db.SaveChangesAsync();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+                
+            return true;
         }
     }
 }

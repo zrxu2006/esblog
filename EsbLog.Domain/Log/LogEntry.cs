@@ -12,7 +12,7 @@ namespace EsbLog.Domain.Log
         public long Id { get; set; }
         public string LogLevel { get; set; }
         public string Message { get; set; }
-        public DateTime Creation { get; set; }
+        public DateTime? Creation { get; set; }
         public int AppId { get; set; }
         public virtual App App { get; set; }
 

@@ -17,11 +17,10 @@ namespace EsbLog.Services.Dependancies
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<TestService>();
+            builder.RegisterType<EsbLogConsumerService>();
             builder.RegisterType<LogRepository>()
                     .As<ILogRepository>();
-            builder.Register(c => new PlatformDbContext(c.Resolve<IConnectionString>().ConnectionString))
-                .As<IPlatformDbContext>();                    
+            builder.RegisterType<PlatformDbFactory>();                    
             builder.RegisterType<PlatformConnectionStringProvider>()
                     .As<IConnectionString>()
                     .SingleInstance();

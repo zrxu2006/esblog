@@ -18,7 +18,8 @@ namespace EsbLog.Platform.Database.Mapping
 
             Property(l => l.LogLevel).HasColumnName("Level");
             Property(l => l.Message).HasColumnName("Message");
-            Property(l => l.Creation).HasColumnName("CreateTime");
+            Property(l => l.Creation).HasColumnName("AppCreateTime");
+            //Property(l => l.Creation).HasColumnName("CreateTime");
             Property(l => l.AppId).HasColumnName("AppId");
 
             HasRequired(l => l.App).WithMany().HasForeignKey(l => l.AppId);
